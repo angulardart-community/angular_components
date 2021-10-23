@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// @dart=2.9
+
 /// Definition for a method that takes in an item and converts it to a string.
 typedef ItemRenderer<T> = String Function(T item);
 

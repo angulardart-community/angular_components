@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// @dart=2.9
+
 /// A component or directive that can be programmatically focused.
 ///
 /// Directive can manage if it means to put focus on root of itself

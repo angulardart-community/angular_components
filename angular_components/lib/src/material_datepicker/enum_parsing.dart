@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// @dart=2.9
+
 // Apparently Dart enums don't have any kind of "valueOf" or anything.
 /// Fuzzy-parses an enum, given a list of enum values and the string. It's
 /// "fuzzy" because it ignores case and treats hyphens and underscores as

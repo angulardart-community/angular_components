@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// @dart=2.9
+
 // TODO(google): Move this to another exported library.
 export 'package:angular_components/src/laminate/popup/dom_popup_source.dart';
 export 'package:angular_components/src/laminate/popup/popup_hierarchy.dart';

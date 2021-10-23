@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// @dart=2.9
+
 /// A function which takes in an error map, and returns another modified errors
 /// map.
 typedef ErrorFn = Map<String, dynamic> Function(Map<String, dynamic> errors);

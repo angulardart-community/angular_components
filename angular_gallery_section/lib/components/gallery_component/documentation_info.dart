@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// @dart=2.9
+
 /// Encoding for different types of documenation for the gallery builders.
 ///
 /// Simplifies translating to and from JSON files between build steps.

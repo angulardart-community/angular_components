@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// @dart=2.9
+
 export 'package:angular_components/src/material_tree/group/material_tree_group.dart'
     show materialTreeLeftPaddingToken;
 export 'package:angular_components/src/material_tree/material_tree_dropdown.dart';

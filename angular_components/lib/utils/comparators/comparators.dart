@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// @dart=2.9
+
 /// Use this as a mixin to be able to use arithmetic comparison operators
 /// in your class.
 abstract class Comparators<T> implements Comparable<T> {

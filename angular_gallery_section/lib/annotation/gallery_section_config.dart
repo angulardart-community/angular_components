@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// @dart=2.9
+
 /// An annotation for configuring a section in an Angular component gallery.
 ///
 /// A section is typically equivalent to a package that contains one or a few
