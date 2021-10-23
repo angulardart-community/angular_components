@@ -19,7 +19,7 @@ import 'package:angular_components/mixins/material_dropdown_base.dart';
 import 'package:angular_components/model/selection/selection_options.dart';
 
 const materialTreeLeftPaddingToken =
-    OpaqueToken('MaterialTreeGroupComponent_materialTreeLeftPaddingToken');
+    OpaqueToken<int>('MaterialTreeGroupComponent_materialTreeLeftPaddingToken');
 
 /// An internal component for rendering selection options.
 ///

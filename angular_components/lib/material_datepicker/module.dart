@@ -14,7 +14,7 @@ import 'model.dart';
 const clockValue = Clock();
 
 const datepickerClock =
-    OpaqueToken('third_party.dart_src.acx.material_datepicker.datepickerClock');
+    OpaqueToken<Clock>('third_party.dart_src.acx.material_datepicker.datepickerClock');
 
 /// Standard bindings needed by material datepicker components.
 ///
@@ -57,11 +57,3 @@ const _sharedClockBindings = [
 // TODO(google): Remove this and fix clients.
 const _legacyClockBinding = Provider(Clock, useValue: clockValue);
 
-/// DI token for specifying a default date range, intended to be consumed by
-/// some client-specified bindings for a [DatepickerModel].
-const defaultDateRange = OpaqueToken('defaultDateRange');
-
-/// DI token for specifying a default date range with a comparison range,
-/// intended to be consumed by some client-specified bindings for a
-/// [DatepickerModel].
-const defaultDateComparison = OpaqueToken('defaultDateComparison');

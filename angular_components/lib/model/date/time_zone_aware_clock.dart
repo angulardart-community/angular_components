@@ -19,7 +19,7 @@ final _logger =
 /// Deprecated in favor of TimeZoneAwareClock, since having two ways to perform
 /// the same task is redundant, and since subclassing is more expressive.
 @Deprecated('use the TimeZoneAwareClock class instead')
-const timeZoneAwareClock = OpaqueToken('timeZoneAwareClock');
+const timeZoneAwareClock = OpaqueToken<Clock>('timeZoneAwareClock');
 
 /// Provides [timeZoneAwareClock], an instance of [Clock] set to
 /// [SettableTimeZone], which can change at runtime.

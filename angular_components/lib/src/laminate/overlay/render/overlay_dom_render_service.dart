@@ -9,6 +9,7 @@ import 'dart:html';
 
 import 'package:angular/angular.dart' hide Visibility;
 import 'package:angular_components/laminate/enums/visibility.dart';
+import 'package:angular_components/model/math/box.dart';
 import 'package:angular_components/src/laminate/overlay/overlay_state.dart';
 import 'package:angular_components/src/laminate/overlay/render/overlay_style_config.dart';
 import 'package:angular_components/laminate/overlay/zindexer.dart';
@@ -18,7 +19,7 @@ import 'package:angular_components/utils/angular/imperative_view/imperative_view
 import 'package:angular_components/utils/browser/dom_service/dom_service.dart';
 
 /// An opaque token for the name of the overlay container, if any.
-const overlayContainerName = OpaqueToken('overlayContainerName');
+const overlayContainerName = OpaqueToken<String>('overlayContainerName');
 
 /// An opaque token of the DOM element that is the container.
 ///
@@ -27,30 +28,30 @@ const overlayContainerName = OpaqueToken('overlayContainerName');
 ///     bootstrap(RootComponent, [
 ///       provide(overlayContainerToken, useValue: overlayContainer)
 ///     ]);
-const overlayContainerToken = OpaqueToken('overlayContainer');
+const overlayContainerToken = OpaqueToken<HtmlElement>('overlayContainer');
 
 /// Where [overlayContainerToken] should be created.
-const overlayContainerParent = OpaqueToken('overlayContainerParent');
+const overlayContainerParent = OpaqueToken<HtmlElement>('overlayContainerParent');
 
 /// Flag whether to use synchronous reads/writes instead of async.
 ///
 /// The reason for this is that overlays are already in a position:absolute
 /// layer in the DOM, and waiting for the next frame makes less sense and causes
 /// latency issues.
-const overlaySyncDom = OpaqueToken('overlaySyncDom');
+const overlaySyncDom = OpaqueToken<bool>('overlaySyncDom');
 
 /// Flag whether to reposition popups on every frame when trackLayoutChanges is
 /// true.
 ///
 /// This allows popups to scroll with the page if the overlay container is not
 /// part of the scrolling container.
-const overlayRepositionLoop = OpaqueToken('overlayRepositionLoop');
+const overlayRepositionLoop = OpaqueToken<bool>('overlayRepositionLoop');
 
 /// An token to provide custom viewport boundaries for popups.
 ///
 /// By default popups are contained within the browser window. This allows apps
 /// to provide boundaries around the edges of the window to contain popups.
-const overlayViewportBoundaries = OpaqueToken('overlayViewportBoundaries');
+const overlayViewportBoundaries = OpaqueToken<Box>('overlayViewportBoundaries');
 
 /// A DOM implementation of the components needed for [OverlayService].
 ///
