@@ -203,7 +203,7 @@ class MaterialDropdownSelectComponent<T> extends MaterialSelectBase<T>
       this._changeDetector,
       HtmlElement element)
       : activeModel = ActiveItemModel(idGenerator),
-        popupClassName = constructEncapsulatedCss(popupClass, element.classes),
+        popupClassName = constructEncapsulatedCss(popupClass ?? '', element.classes),
         listId = (idGenerator ?? SequentialIdGenerator.fromUUID()).nextId() {
     isRtl = rtl;
     preferredPositions = RelativePosition.overlapAlignments;

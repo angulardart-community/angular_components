@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
 
 /// A callback registered with [AsyncNotifier].
@@ -45,10 +43,10 @@ typedef OnUpdateCallback = void Function();
 ///       void doExpensive() { ... }
 ///     }
 class AsyncUpdateScheduler {
-  final OnUpdateCallback _updateCallback;
+  final OnUpdateCallback? _updateCallback;
 
   bool _isUpdateScheduled = false;
-  StreamController<Null> _onUpdateStreamController;
+  StreamController<Null>? _onUpdateStreamController;
 
   /// Creates a new scheduler, optionally with a callback.
   AsyncUpdateScheduler([this._updateCallback]);
@@ -57,7 +55,7 @@ class AsyncUpdateScheduler {
     if (_onUpdateStreamController == null) {
       _onUpdateStreamController = StreamController.broadcast(sync: true);
     }
-    return _onUpdateStreamController.stream;
+    return _onUpdateStreamController!.stream;
   }
 
   /// Asynchronously schedule an action for later in the VM turn.
@@ -69,10 +67,10 @@ class AsyncUpdateScheduler {
       scheduleMicrotask(() {
         _isUpdateScheduled = false;
         if (_updateCallback != null) {
-          _updateCallback();
+          _updateCallback!();
         }
         if (_onUpdateStreamController != null) {
-          _onUpdateStreamController.add(null);
+          _onUpdateStreamController!.add(null);
         }
       });
     }

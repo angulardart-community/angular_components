@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:html';
 
 /// Return a string representing the encapsulated classes from [classes]
@@ -26,7 +24,7 @@ import 'dart:html';
 ///  final popupClass =
 ///      constructEncapsulatedCss('myPopup', _hostElement.classes);
 String constructEncapsulatedCss(String className, CssClassSet classes) {
-  var result = className ?? '';
+  var result = className;
   for (final i in classes) {
     // Add encapsulation classes from host
     if (i.startsWith('_ngcontent')) result += ' $i';

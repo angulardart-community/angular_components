@@ -2,11 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
-
-import 'package:meta/meta.dart';
 
 /// A function that can be throttled or debounced.
 typedef UnaryFunction<T> = Function(T argument);
@@ -26,18 +22,18 @@ typedef RateLimitStrategy<T> = UnaryFunction<T> Function(
 /// function is called. The future is completed with the return results of the
 /// [delegate] function.
 DebouncedFunction<T> debounce<T>(UnaryFunction<T> delegate, Duration delay) {
-  Timer timer;
-  Completer completer;
+  Timer? timer;
+  Completer? completer;
 
   return (argument) {
     timer?.cancel();
     completer ??= Completer();
     timer = Timer(delay, () {
-      completer.complete(delegate(argument));
+      completer!.complete(delegate(argument));
       completer = null;
       timer = null;
     });
-    return completer.future;
+    return completer!.future;
   };
 }
 
@@ -61,11 +57,11 @@ UnaryFunction<T> throttleGuaranteeLast<T>(
     _throttle(delegate, interval, guaranteeLast: true);
 
 UnaryFunction<T> _throttle<T>(UnaryFunction<T> delegate, Duration interval,
-    {@required bool guaranteeLast}) {
+    {required bool guaranteeLast}) {
   bool onCooldown = false;
   bool hasLastArg = false;
-  T lastArg;
-  UnaryFunction<T> self;
+  late T lastArg;
+  late UnaryFunction<T> self;
   self = (T argument) {
     if (!onCooldown) {
       onCooldown = true;

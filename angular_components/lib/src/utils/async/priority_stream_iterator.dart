@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
 
 import 'package:collection/collection.dart';
@@ -12,17 +10,17 @@ import 'package:collection/collection.dart';
 /// queue and selects the one with the most priority (the least one by
 /// comparison) of all accumulated values at each [moveNext] call.
 class PriorityStreamIterator<T extends Comparable<Object>>
-    implements StreamIterator<T> {
+    implements StreamIterator<T?> {
   final StreamIterator<T> _iterator;
   final PriorityQueue<T> _queue;
 
-  T _current;
-  Future<bool> _next;
+  T? _current;
+  late Future<bool> _next;
 
   /// Create a [PriorityStreamIterator] on [stream] with an optional
   /// [comparison] function. If [comparison] is not provided, [T] must implement
   /// Comparable<T>.
-  PriorityStreamIterator(Stream<T> stream, [int comparison(T a, T b)])
+  PriorityStreamIterator(Stream<T> stream, [int comparison(T a, T b)?])
       : _iterator = StreamIterator(stream),
         _queue = _StablePriorityQueue<T>(comparison) {
     _accumulateValues();
@@ -46,18 +44,19 @@ class PriorityStreamIterator<T extends Comparable<Object>>
   }
 
   @override
-  T get current => _current;
+  T? get current => _current;
 
   @override
-  Future<Object> cancel() {
+  Future<void> cancel() async {
     _clear();
-    return _iterator.cancel();
+    await _iterator.cancel();
   }
 
   // This function is not async to be synchronous for a synchronous
   // StreamIterator.
   void _accumulateValues() {
-    (_next = _getNextValue()).then((_) {
+    _next = _getNextValue();
+    _next.then((_) {
       if (_) {
         _accumulateValues();
       }
@@ -86,7 +85,7 @@ class PriorityStreamIterator<T extends Comparable<Object>>
 /// default [Comparable.compare].
 class _StablePriorityQueue<T extends Comparable<Object>>
     extends HeapPriorityQueue<T> {
-  _StablePriorityQueue([Comparator<T> comparison])
+  _StablePriorityQueue([Comparator<T>? comparison])
       : this._(_OrderedComparator(comparison ?? _defaultComparator<T>()));
 
   _StablePriorityQueue._(this.comparator) : super(comparator);
@@ -174,12 +173,13 @@ class _OrderedComparator<T extends Comparable<Object>> implements Function {
   }
 
   int _compareOrder(T a, T b) {
-    if (!_ordinalByElement.containsKey(a) ||
-        !_ordinalByElement.containsKey(b)) {
+    final aVal = _ordinalByElement[a];
+    final bVal = _ordinalByElement[b];
+    if (aVal == null || bVal == null) {
       throw StateError(
           "Comparing elements that weren't registered with the comparator.");
     }
-    return _ordinalByElement[a] - _ordinalByElement[b];
+    return aVal - bVal;
   }
 
   void _renumerate() {

@@ -58,7 +58,7 @@ class MaterialTooltipDirective extends TooltipTarget
       @Attribute('initPopupAriaAttributes') String initAriaAttributes,
       @Attribute('tooltipClass') String tooltipClass)
       : _popupClassName =
-            constructEncapsulatedCss(tooltipClass, element.classes),
+            constructEncapsulatedCss(tooltipClass ?? '', element.classes),
         super(domPopupSourceFactory, viewContainerRef, element,
             initAriaAttributes ?? 'false') {
     inLongPress = false;

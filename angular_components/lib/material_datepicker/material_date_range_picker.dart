@@ -408,7 +408,7 @@ class MaterialDateRangePickerComponent
       this._domService,
       this._ngZone)
       : _config = config ?? DatepickerConfig(),
-        popupClassName = constructEncapsulatedCss(popupClass, element.classes) {
+        popupClassName = constructEncapsulatedCss(popupClass ?? '', element.classes) {
     // TODO(google): Migrate to use only datepickerClock
     clock ??= legacyClock;
 

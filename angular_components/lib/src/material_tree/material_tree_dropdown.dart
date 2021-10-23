@@ -153,7 +153,7 @@ class MaterialTreeDropdownComponent<T>
 
   MaterialTreeDropdownComponent(this._domService,
       @Attribute('popupClass') String popupClass, HtmlElement element)
-      : popupClassName = constructEncapsulatedCss(popupClass, element.classes) {
+      : popupClassName = constructEncapsulatedCss(popupClass ?? '', element.classes) {
     selection = SelectionModel<T>.empty();
   }
 

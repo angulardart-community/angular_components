@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'package:angular_components/utils/disposer/disposer.dart';
 
 typedef CallbackNoParamFn = void Function();
@@ -17,7 +15,7 @@ typedef CallbackSingleParamFn<T> = void Function(T value);
 /// result.
 /// Being able to use noSuchMethod would simplify the need for multiple classes.
 class DisposableCallbackBase implements Disposable {
-  Function _callback;
+  Function? _callback;
 
   @override
   void dispose() {
@@ -34,8 +32,9 @@ class DisposableCallback extends DisposableCallbackBase {
   }
 
   void call() {
-    if (_callback != null) {
-      _callback();
+    final callback = _callback;
+    if (callback != null) {
+      callback();
     }
   }
 }
@@ -47,8 +46,9 @@ class SingleValueCallback<T> extends DisposableCallbackBase {
   }
 
   void call(T value) {
-    if (_callback != null) {
-      _callback(value);
+    final callback = _callback;
+    if (callback != null) {
+      callback();
     }
   }
 }

@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
 
 typedef StreamCallContextFunc = void Function(dynamic Function() func);
@@ -46,10 +44,10 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
   final bool _runInZone;
 
   /// Called on the first subscription to the stream.
-  SubscriptionChangeListener<T> _onListen;
+  SubscriptionChangeListener<T>? _onListen;
 
   /// Called when the last subscription is removed.
-  SubscriptionChangeListener<T> _onCancel;
+  SubscriptionChangeListener<T>? _onCancel;
 
   @override
   final bool isBroadcast = true;
@@ -61,7 +59,7 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
 
   /// List of items to send to avoid scheduling multiple microtasks for each
   /// item to be sent.
-  List<T> _itemsToSend;
+  List<T>? _itemsToSend;
 
   /// A flag indicating that cleanup is required in case subscriptions are
   /// removed during processing.
@@ -77,8 +75,8 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
   SimpleStream.broadcast(
       {bool isSync = false,
       bool runInZone = false,
-      SubscriptionChangeListener<T> onListen,
-      SubscriptionChangeListener<T> onCancel})
+      SubscriptionChangeListener<T>? onListen,
+      SubscriptionChangeListener<T>? onCancel})
       : _isSync = isSync,
         _runInZone = runInZone,
         _onListen = onListen,
@@ -88,8 +86,8 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
 
   @override
   Stream<T> asBroadcastStream(
-      {void onListen(StreamSubscription<T> subscription),
-      void onCancel(StreamSubscription<T> subscription)}) {
+      {void onListen(StreamSubscription<T> subscription)?,
+      void onCancel(StreamSubscription<T> subscription)?}) {
     if (onListen != null || onCancel != null) {
       throw UnsupportedError('Not supported outside constructor.');
     }
@@ -103,7 +101,7 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
   /// Send an item to the subscriptions.
   @override
   void add(T item) {
-    if (!hasListener) return;
+    if (!hasListener || _closed) return;
     if (_isSync) {
       _sendItem(_subscriptions, item);
     } else {
@@ -112,7 +110,7 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
         _itemsToSend = [];
         scheduleMicrotask(_sendAsync);
       }
-      _itemsToSend.add(item);
+      _itemsToSend!.add(item);
     }
   }
 
@@ -147,8 +145,9 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
         listeners.length = liveCount;
         // If there are no listeners left and onCancel is set, then call
         // onCancel to indicate that the last subscription has been removed.
-        if (liveCount == 0 && _onCancel != null) {
-          _onCancel(firstRemovedListener);
+        final onCancel = _onCancel;
+        if (liveCount == 0 && onCancel != null) {
+          onCancel(firstRemovedListener);
         }
         break;
       }
@@ -172,7 +171,7 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
   }
 
   @override
-  void addError(errorEvent, [StackTrace stackTrace]) {
+  void addError(errorEvent, [StackTrace? stackTrace]) {
     if (!hasListener) return;
     var listeners = _subscriptions;
     int len = listeners.length;
@@ -184,7 +183,7 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
         sub._closeSubscription();
       }
       if (callback != null) {
-        if (callback is ZoneBinaryCallback<Object, Object, Object>) {
+        if (callback is ZoneBinaryCallback<Object, Object, Object?>) {
           callback(errorEvent, stackTrace);
         } else if (callback is ZoneUnaryCallback<Object, Object>) {
           callback(errorEvent);
@@ -193,37 +192,35 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
     }
   }
 
+  bool _closed = false;
+
   @override
   void close() {
-    if (_subscriptions != null) {
-      var listeners = _subscriptions;
-      // This will cause an exception to be thrown if a listener is added while
-      // closing subscriptions.
-      _subscriptions = null;
-      for (int i = 0; i < listeners.length; i++) {
-        listeners[i]._closeSubscription();
-      }
+    var listeners = _subscriptions;
+    // This will cause an exception to be thrown if a listener is added while
+    // closing subscriptions.
+    _closed = true;
+    for (int i = 0; i < listeners.length; i++) {
+      listeners[i]._closeSubscription();
     }
   }
 
-  bool get isClosed => _subscriptions == null;
+  bool get isClosed => _closed;
 
-  bool get hasListener => _subscriptions != null && _subscriptions.isNotEmpty;
+  bool get hasListener => _subscriptions.isNotEmpty;
 
   void _sendAsync() {
     var listeners = _subscriptions;
-    var sendList = _itemsToSend;
+    var sendList = _itemsToSend ?? [];
     _itemsToSend = null;
     // ensure stream did not close before microtask executed.
-    if (listeners != null) {
-      int len = listeners.length;
-      for (int i = 0; i < sendList.length; i++) {
-        T item = sendList[i];
-        // pass in the length of the listeners to ensure there isn't a case
-        // where a new listener gets the item if they joined during a callabck
-        // when sending multiple items.
-        _sendItem(listeners, item, len);
-      }
+    int len = listeners.length;
+    for (int i = 0; i < sendList.length; i++) {
+      T item = sendList[i];
+      // pass in the length of the listeners to ensure there isn't a case
+      // where a new listener gets the item if they joined during a callabck
+      // when sending multiple items.
+      _sendItem(listeners, item, len);
     }
   }
 
@@ -246,25 +243,27 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
   }
 
   @override
-  StreamSubscription<T> listen(void onData(T event),
-      {Function onError, void onDone(), bool cancelOnError}) {
+  StreamSubscription<T> listen(void onData(T event)?,
+      {Function? onError, void onDone()?, bool? cancelOnError}) {
     // Don't allow listening to a closed stream, it will throw exception in
     // non checked mode since subscriptions will be null once the stream is
     // closed.
-    assert(_subscriptions != null);
-    Zone contextZone;
+    assert(isClosed == false);
+    Zone? contextZone;
     if (_runInZone) {
       contextZone = Zone.current;
     }
     var sub = SimpleStreamSubscription<T>(
-        this, onData, onDone, onError, cancelOnError, contextZone);
+        this, onData, onDone, onError, cancelOnError == true, contextZone);
     if (_subscriptions.isEmpty) {
       _subscriptions = [sub];
     } else {
       _subscriptions.add(sub);
     }
-    if (_onListen != null && _subscriptions.length == 1) {
-      _onListen(sub);
+
+    final onListen = _onListen;
+    if (onListen != null && _subscriptions.length == 1) {
+      onListen(sub);
     }
     return sub;
   }
@@ -274,13 +273,13 @@ class SimpleStream<T> extends Stream<T> implements EventSink<T> {
 /// any new subscribers in addition to any new items.
 class LastStateStream<T> extends SimpleStream<T> {
   /// The last item that was added to the stream.
-  T _lastItem;
+  T? _lastItem;
 
   LastStateStream(
       {bool isSync = false,
       bool runInZone = false,
-      SubscriptionChangeListener<dynamic> onListen,
-      SubscriptionChangeListener<dynamic> onCancel})
+      SubscriptionChangeListener<dynamic>? onListen,
+      SubscriptionChangeListener<dynamic>? onCancel})
       : super.broadcast(
             isSync: isSync,
             runInZone: runInZone,
@@ -294,20 +293,26 @@ class LastStateStream<T> extends SimpleStream<T> {
   }
 
   @override
-  StreamSubscription<T> listen(void onData(T event),
-      {Function onError, void onDone(), bool cancelOnError}) {
-    SimpleStreamSubscription<T> sub = super.listen(onData,
-        onError: onError, onDone: onDone, cancelOnError: cancelOnError);
-    if (_lastItem != null) {
+  StreamSubscription<T> listen(void onData(T event)?,
+      {Function? onError, void onDone()?, bool? cancelOnError}) {
+    SimpleStreamSubscription<T> sub = super.listen(
+      onData,
+      onError: onError,
+      onDone: onDone,
+      cancelOnError: cancelOnError,
+    ) as SimpleStreamSubscription<T>;
+
+    final lastItem = _lastItem;
+    if (lastItem != null) {
       /// If the stream is synchronous, send the item immediately, if it is
       /// asynchronous then make sure that items are not pending by checking
       /// that the the _itemsToSend list is not null otherwise a listener
       /// might receive the same data twice.
       if (_isSync) {
-        _sendItem([sub], _lastItem);
+        _sendItem([sub], lastItem);
       } else if (_itemsToSend == null) {
         scheduleMicrotask(() {
-          _sendItem([sub], _lastItem);
+          _sendItem([sub], lastItem);
         });
       }
     }
@@ -321,7 +326,8 @@ class EmptySimpleStream<T> extends SimpleStream<T> {
   EmptySimpleStream([bool isSync = false]) : super(isSync: isSync);
 
   @override
-  StreamSubscription<T> listen(onData, {onError, onDone, cancelOnError}) {
+  StreamSubscription<T> listen(onData,
+      {Function? onError, void onDone()?, bool? cancelOnError}) {
     return SimpleStreamSubscription._empty();
   }
 }
@@ -335,11 +341,11 @@ class EmptySimpleStream<T> extends SimpleStream<T> {
 class SimpleStreamSubscription<T> implements StreamSubscription<T> {
   @override
   final bool isPaused = false;
-  SimpleStream<T> _stream;
-  StreamCallbackFunc<T> _callback;
-  Zone _contextZone;
-  Function _doneCallback;
-  Function _onError;
+  SimpleStream<T>? _stream;
+  StreamCallbackFunc<T>? _callback;
+  Zone? _contextZone;
+  Function? _doneCallback;
+  Function? _onError;
   bool _cancelOnError = false;
 
   factory SimpleStreamSubscription._empty() =>
@@ -349,34 +355,38 @@ class SimpleStreamSubscription<T> implements StreamSubscription<T> {
       this._onError, this._cancelOnError, this._contextZone);
 
   @override
-  Future<dynamic> cancel() {
-    if (_stream != null) {
+  Future<dynamic> cancel() async {
+    var stream = _stream;
+    if (stream != null) {
       // Set doneCallback to null so when [_closeSubscription] is called, we
       // don't call doneCallback.
-      var stream = _stream;
       _doneCallback = null;
       _closeSubscription();
       stream._scheduleCleanup();
     }
-    return null;
+    return;
   }
 
   void _closeSubscription() {
     _stream = null;
     _callback = null;
     _onError = null;
-    if (_doneCallback != null) {
-      _doneCallback();
+
+    final doneCallback = _doneCallback;
+    if (doneCallback != null) {
+      doneCallback();
       _doneCallback = null;
     }
   }
 
   void _add(T data) {
-    if (_callback != null) {
-      if (_contextZone != null) {
-        _contextZone.runUnary(_callback, data);
+    final callback = _callback;
+    if (callback != null) {
+      final contextZone = _contextZone;
+      if (contextZone != null) {
+        contextZone.runUnary(callback, data);
       } else {
-        _callback(data);
+        callback(data);
       }
     }
   }
@@ -411,7 +421,7 @@ class SimpleStreamSubscription<T> implements StreamSubscription<T> {
   }
 
   @override
-  Future<S> asFuture<S>([S futureValue]) {
+  Future<S> asFuture<S>([S? futureValue]) {
     throw UnsupportedError('Not supported.');
   }
 }
@@ -425,8 +435,8 @@ class SimpleEmitter<T> extends SimpleStream<T> {
   SimpleEmitter(
       {bool isSync = true,
       bool runInZone = true,
-      SubscriptionChangeListener<dynamic> onListen,
-      SubscriptionChangeListener<dynamic> onCancel})
+      SubscriptionChangeListener<dynamic>? onListen,
+      SubscriptionChangeListener<dynamic>? onCancel})
       : super.broadcast(
             isSync: isSync,
             runInZone: runInZone,

@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
 
 import 'package:angular_components/utils/disposer/disposer.dart';
@@ -23,7 +21,7 @@ class DisposableFuture<T> implements Future<T>, Disposable {
   /// Returns a disposable version of [stream.first].
   factory DisposableFuture.first(Stream<T> stream) {
     final completer = Completer<T>.sync();
-    StreamSubscription<Object> subscription;
+    late StreamSubscription subscription;
     subscription = stream.listen((value) {
       subscription.cancel();
       completer.complete(value);
@@ -34,8 +32,8 @@ class DisposableFuture<T> implements Future<T>, Disposable {
   /// Returns a disposable version of [stream.last].
   factory DisposableFuture.last(Stream<T> stream) {
     final completer = Completer<T>.sync();
-    StreamSubscription<Object> subscription;
-    T lastValue;
+    late StreamSubscription subscription;
+    late T lastValue;
     subscription = stream.listen((value) {
       lastValue = value;
     }, onDone: () {
@@ -72,19 +70,19 @@ class DisposableFuture<T> implements Future<T>, Disposable {
 
   @override
   DisposableFuture<S> then<S>(FutureOr<S> onValue(T value),
-      {Function onError}) {
+      {Function? onError}) {
     return DisposableFuture(
         _delegateFuture.then<S>((v) {
           if (!_wasDisposed) {
             return onValue(v);
           }
-          return null;
+          throw FutureDisposedExcepetion();
         }, onError: onError),
         _disposeFn);
   }
 
   @override
-  Future<T> catchError(Function onError, {bool test(Object error)}) {
+  Future<T> catchError(Function onError, {bool test(Object error)?}) {
     return _delegateFuture.catchError(onError, test: test);
   }
 
@@ -101,7 +99,9 @@ class DisposableFuture<T> implements Future<T>, Disposable {
   Stream<T> asStream() => _delegateFuture.asStream();
 
   @override
-  Future<T> timeout(Duration timeLimit, {onTimeout()}) {
+  Future<T> timeout(Duration timeLimit, {FutureOr<T> onTimeout()?}) {
     return _delegateFuture.timeout(timeLimit, onTimeout: onTimeout);
   }
 }
+
+class FutureDisposedExcepetion implements Exception {}

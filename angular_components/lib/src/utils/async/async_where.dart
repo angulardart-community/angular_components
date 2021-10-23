@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
 
 /// Returns a single-subscription stream of the [items] for which the [filter]
@@ -31,7 +29,7 @@ Stream<T> asyncWhere<T>(List<T> items, Future<bool> filter(T item)) async* {
 ///
 /// Example: newKing = asyncFirst(sons, survivesToMaturity);
 Future<T> asyncFirst<T>(List<T> items, Future<bool> filter(T item),
-        {orElse()}) =>
+        {T orElse()?}) =>
     asyncWhere<T>(items, filter)
         .firstWhere((_) => true, orElse: orElse)
         .then((x) => x);
