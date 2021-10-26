@@ -31,7 +31,8 @@ const overlayContainerName = OpaqueToken<String>('overlayContainerName');
 const overlayContainerToken = OpaqueToken<HtmlElement>('overlayContainer');
 
 /// Where [overlayContainerToken] should be created.
-const overlayContainerParent = OpaqueToken<HtmlElement>('overlayContainerParent');
+const overlayContainerParent =
+    OpaqueToken<HtmlElement>('overlayContainerParent');
 
 /// Flag whether to use synchronous reads/writes instead of async.
 ///

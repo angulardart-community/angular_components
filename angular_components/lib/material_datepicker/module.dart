@@ -13,8 +13,8 @@ import 'model.dart';
 
 const clockValue = Clock();
 
-const datepickerClock =
-    OpaqueToken<Clock>('third_party.dart_src.acx.material_datepicker.datepickerClock');
+const datepickerClock = OpaqueToken<Clock>(
+    'third_party.dart_src.acx.material_datepicker.datepickerClock');
 
 /// Standard bindings needed by material datepicker components.
 ///
@@ -56,4 +56,3 @@ const _sharedClockBindings = [
 /// this, but some clients may depend on having this here still.
 // TODO(google): Remove this and fix clients.
 const _legacyClockBinding = Provider(Clock, useValue: clockValue);
-
