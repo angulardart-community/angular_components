@@ -27,7 +27,9 @@ dependencies:
   sass_builder: ^2.0.2
 
 dev_dependencies:
+  build_runner: ^2.1.4
+  build_test: ^2.1.4
+  build_web_compilers: ^3.2.1
   lints: ^1.0.1
   path: ^1.6.1
-
   test: ^1.0.0
