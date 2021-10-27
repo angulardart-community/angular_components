@@ -136,7 +136,7 @@ Comparator<T> _defaultComparator<T extends Comparable<Object>>() =>
 
 /// A [Comparator] that allows registering elements and uses the order of
 /// registration to resolve the cases when elements compare as equal.
-class _OrderedComparator<T extends Comparable<Object>> implements Function {
+class _OrderedComparator<T extends Comparable<Object>> {
   static const RENUMERATE_THRESHOLD = 1000000;
 
   final Comparator<T> _comparison;
