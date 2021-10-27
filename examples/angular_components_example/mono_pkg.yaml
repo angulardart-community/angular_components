@@ -11,4 +11,4 @@ stages:
 
 cache:
   directories:
-    - .dart_to
+    - .dart_tool

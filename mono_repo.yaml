@@ -3,7 +3,14 @@
 self_validate: analyze_and_format
 
 github:
-  cron: '0 0 * * 0' # “At 00:00 (UTC) on Sunday.”
+  on:
+    push:
+      branches:
+        - main
+        - master
+        - null-safety
+    pull_request:
+  # cron: '0 0 * * 0' # “At 00:00 (UTC) on Sunday.” # Conflict with `on`
   stages:
     - analyze_and_format_core
     - analyze_and_format_examples_1
