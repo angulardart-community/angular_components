@@ -70,8 +70,7 @@ class MenuItemGroupWithSelection<SelectionItemType>
 /// A selectable [MenuItem].
 class SelectableMenuItem<ItemType> extends PropertyChangeNotifier
     implements MenuItem {
-  MenuAction _action;
-  ActionWithContext _actionWithContext;
+  final ActionWithContext actionWithContext;
   SelectableOption _selectableState;
   String ariaChecked;
 
@@ -135,8 +134,7 @@ class SelectableMenuItem<ItemType> extends PropertyChangeNotifier
       this.secondaryLabel,
       this.labelAnnotation,
       Iterable<String> cssClasses,
-      MenuAction action,
-      ActionWithContext actionWithContext,
+      this.actionWithContext = _noOp2,
       SelectableOption selectableState = SelectableOption.Selectable,
       bool shouldSelectOnItemClick,
       MenuItemAffix itemSuffix,
@@ -149,18 +147,6 @@ class SelectableMenuItem<ItemType> extends PropertyChangeNotifier
         cssClasses = BuiltList<String>(cssClasses ?? const []) {
     assert(itemSuffix == null || itemSuffixes == null,
         'Only one of itemSuffix or itemSuffixes should be provided');
-    assert(action == null || actionWithContext == null,
-        'Only one of action or actionWithContext should be provided');
-    if (action != null) {
-      _action = action;
-      _actionWithContext = (_) => action();
-    } else if (actionWithContext != null) {
-      _action = () => actionWithContext(null);
-      _actionWithContext = actionWithContext;
-    } else {
-      _action = _noOp;
-      _actionWithContext = _noOp2;
-    }
   }
 
   @override
@@ -194,30 +180,6 @@ class SelectableMenuItem<ItemType> extends PropertyChangeNotifier
   }
 
   @override
-  MenuAction get action => _action;
-
-  @override
-  set action(MenuAction value) {
-    if (value == _action) return;
-
-    _action = value;
-    _actionWithContext = (_) => value();
-    notifyPropertyChange(#action, _action, value);
-  }
-
-  @override
-  ActionWithContext get actionWithContext => _actionWithContext;
-
-  @override
-  set actionWithContext(ActionWithContext value) {
-    if (value == _actionWithContext) return;
-
-    _actionWithContext = value;
-    _action = () => value(null);
-    notifyPropertyChange(#actionWithContext, _actionWithContext, value);
-  }
-
-  @override
   bool get hasSecondaryLabel => secondaryLabel != null;
 
   /// Display state of this menu item.
@@ -231,5 +193,4 @@ class SelectableMenuItem<ItemType> extends PropertyChangeNotifier
   }
 }
 
-void _noOp() {}
 void _noOp2(_) {}

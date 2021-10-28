@@ -181,9 +181,6 @@ abstract class BasePortalHost implements PortalHost {
 
   Future<Map<String, dynamic>> attachTemplatePortal(TemplatePortal portal);
 
-  @Deprecated('No longer supported')
-  static Map<String, dynamic> createLocalsMap(ViewRef viewRef) => {};
-
   @override
   Future<void> detach() {
     _attachedPortal.setAttachedHost(null);
@@ -269,7 +266,7 @@ class PortalHostDirective extends BasePortalHost {
     final viewRef = _viewContainerRef.createEmbeddedView(portal.template);
     portal.locals.forEach(viewRef.setLocal);
     setPortalDisposer(_viewContainerRef.clear);
-    return Future.value(BasePortalHost.createLocalsMap(viewRef));
+    return Future.value(const {});
   }
 
   @Input('portalHost')
@@ -320,7 +317,7 @@ class DomPortalHost extends BasePortalHost {
         .then((ref) {
       portal.locals.forEach(ref.viewRef.setLocal);
       setPortalDisposer(ref.dispose);
-      return BasePortalHost.createLocalsMap(ref.viewRef);
+      return const {};
     });
   }
 }

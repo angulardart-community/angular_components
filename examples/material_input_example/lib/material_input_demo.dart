@@ -17,6 +17,12 @@ import 'package:angular_components/material_tooltip/material_tooltip.dart';
 
 typedef ValidityCheck = String Function(String inputText);
 
+int countIgnoringAdCustomizers(String inputText) {
+  String withoutAdCutomizers = inputText.replaceAll(
+      RegExp(r'({=[^}]*}*)|({=[^}]*$)', caseSensitive: false), '');
+  return withoutAdCutomizers.length;
+}
+
 /// This directive applies a custom Validator to any material-input that uses
 /// the Forms API, and also has this directive.
 ///
@@ -42,20 +48,28 @@ class TextValidator {
   }
 }
 
-String demoValidator(String inputText) {
-  if (inputText.isEmpty) return null;
+/// This directive validate simple rules for the demo:
+///
+/// - Text can't contain the char 0
+/// - Text must have length greaterEqual than 5
+@Directive(selector: '[demoValidator]')
+class InputDemoValidator implements Validator {
+  @override
+  Map<String, Object> validate(AbstractControl control) {
+    final String inputText = control.value;
 
-  if (inputText.contains('0')) return 'Input contains 0';
+    if (inputText.isEmpty) return null;
 
-  if (inputText.length < 5) return 'Input should be at least 5 characters.';
+    if (inputText.contains('0')) {
+      return {materialInputErrorKey: 'Input contains 0'};
+    }
 
-  return null;
-}
+    if (inputText.length < 5) {
+      return {materialInputErrorKey: 'Input should be at least 5 characters.'};
+    }
 
-int countIgnoringAdCustomizers(String inputText) {
-  String withoutAdCutomizers = inputText.replaceAll(
-      RegExp(r'({=[^}]*}*)|({=[^}]*$)', caseSensitive: false), '');
-  return withoutAdCutomizers.length;
+    return null;
+  }
 }
 
 @Component(
@@ -75,6 +89,7 @@ int countIgnoringAdCustomizers(String inputText) {
     MaterialTooltipTargetDirective,
     NgIf,
     TextValidator,
+    InputDemoValidator
   ],
   preserveWhitespace: true,
 )
@@ -83,7 +98,6 @@ class MaterialInputDemoComponent {
   String boundText = '';
   num numericValue = 88888;
   String urlValue;
-  ValidityCheck get checkValid => demoValidator;
   Function get characterCount => countIgnoringAdCustomizers;
   Control form;
   bool showAuto = false;

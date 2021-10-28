@@ -46,18 +46,6 @@ abstract class RendersValue<T> {
   set value(T newValue);
 }
 
-/// Defines a method that returns a component to render the Item.  The
-/// component must implement RendersValue.
-@Deprecated('Use FactoryRenderer instead as it allows for treeshaking')
-typedef ComponentRenderer<T extends RendersValue, I> = Type Function(I item);
-
-/// HasComponentRenderer defines a method that takes in an item and returns the
-/// type to use to render the item.
-@Deprecated('Use HasFactoryRenderer instead as it allows for treeshaking')
-abstract class HasComponentRenderer<T extends RendersValue, I> {
-  ComponentRenderer<T, I> componentRenderer;
-}
-
 String defaultItemRenderer(dynamic value) => '$value';
 
 /// An [ItemRenderer] that indicates that components should not render items.

@@ -41,8 +41,7 @@ class PopupHierarchy {
   void _attach(PopupHierarchyElement child) {
     assert(child != null);
     if (_visiblePopupStack.isEmpty) {
-      _rootPane =
-          events.closestWithClass(child.elementRef.nativeElement, 'pane');
+      _rootPane = events.closestWithClass(child.element, 'pane');
     }
     _visiblePopupStack.add(child);
 
@@ -151,7 +150,7 @@ abstract class PopupHierarchyElement {
   /// The html element corresponding to the popup.
   Element get container;
 
-  ElementRef get elementRef => null;
+  Element get element => null;
 
   /// The outer element which should prevent the auto dismiss logic.
   List<Element> get autoDismissBlockers;

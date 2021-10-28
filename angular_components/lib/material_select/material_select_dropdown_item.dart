@@ -7,8 +7,8 @@
 import 'dart:html';
 
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:angular_components/dynamic_component/dynamic_component.dart';
-import 'package:angular_components/glyph/glyph.dart';
 import 'package:angular_components/material_checkbox/material_checkbox.dart';
 import 'package:angular_components/material_select/activation_handler.dart';
 import 'package:angular_components/material_select/handles_aria.dart';
@@ -30,7 +30,7 @@ import 'package:angular_components/utils/id_generator/id_generator.dart';
   styleUrls: ['material_select_dropdown_item.scss.css'],
   directives: [
     DynamicComponent,
-    GlyphComponent,
+    MaterialIconComponent,
     MaterialCheckboxComponent,
     NgIf
   ],

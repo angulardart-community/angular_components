@@ -24,6 +24,7 @@ import 'package:angular_components/model/selection/selection_model.dart';
   directives: [DynamicComponent, NgFor, NgIf],
   templateUrl: 'material_tree_group_flat_list.html',
   styleUrls: ['material_tree_group_flat_list.scss.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class MaterialTreeGroupFlatListComponent<T> extends MaterialTreeNode<T> {
   MaterialTreeGroupFlatListComponent(
@@ -51,6 +52,7 @@ class MaterialTreeGroupFlatListComponent<T> extends MaterialTreeNode<T> {
   ],
   templateUrl: 'material_tree_group_flat_radio.html',
   styleUrls: ['material_tree_group_flat_radio.scss.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class MaterialTreeGroupFlatRadioComponent<T> extends MaterialTreeNode<T> {
   final DropdownHandle _dropdownHandle;
@@ -91,6 +93,7 @@ class MaterialTreeGroupFlatRadioComponent<T> extends MaterialTreeNode<T> {
   ],
   templateUrl: 'material_tree_group_flat_check.html',
   styleUrls: ['material_tree_group_flat_check.scss.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class MaterialTreeGroupFlatCheckComponent<T> extends MaterialTreeNode<T> {
   final DropdownHandle _dropdownHandle;

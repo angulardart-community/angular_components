@@ -43,7 +43,7 @@ class CastIterable<T> {
 /// [changes] to selection.
 abstract class SelectionModel<T> extends Object
     with CastIterable<T>
-    implements Observable<ChangeRecord>, SelectionObservable<T> {
+    implements PropertyChangeNotifier, SelectionObservable<T> {
   /// Creates an immutable, constant model.
   const factory SelectionModel.empty() = NullSelectionModel<T>;
 
@@ -70,23 +70,6 @@ abstract class SelectionModel<T> extends Object
   factory SelectionModel.multi(
       {List<T> selectedValues,
       KeyProvider<T> keyProvider}) = MultiSelectionModel<T>;
-
-  @Deprecated('Use SelectionModel.single or SelectionModel.multi instead.')
-  factory SelectionModel.withList(
-      {List<T> selectedValues,
-      KeyProvider<T> keyProvider,
-      bool allowMulti = false}) {
-    if (allowMulti) {
-      return SelectionModel<T>.multi(
-          selectedValues: selectedValues, keyProvider: keyProvider);
-    } else {
-      return SelectionModel<T>.single(
-          selected: (selectedValues?.isNotEmpty ?? false)
-              ? selectedValues.last
-              : null,
-          keyProvider: keyProvider);
-    }
-  }
 
   /// Clears selection.
   void clear();

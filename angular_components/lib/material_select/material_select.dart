@@ -88,13 +88,6 @@ class MaterialSelectComponent<T> extends MaterialSelectBase<T>
   @Input()
   String ariaDescribedBy;
 
-  @Deprecated('Use factoryRenderer instead it is more tree-shakable')
-  @Input()
-  @override
-  set componentRenderer(ComponentRenderer value) {
-    super.componentRenderer = value;
-  }
-
   /// Used to create a [ComponentFactory] that must override [RendersValue]
   /// from a given option allowing for a more expressive option.
   @Input()

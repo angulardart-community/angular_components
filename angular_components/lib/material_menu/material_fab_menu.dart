@@ -164,7 +164,8 @@ class MaterialFabMenuComponent extends Object
   void trigger(Event event) {
     _trigger(
         activateFirstItem:
-            event is KeyboardEvent || _isLikelyScreenReader(event));
+            event is KeyboardEvent || _isLikelyScreenReader(event),
+        event: event);
   }
 
   void hideMenu() {
@@ -175,10 +176,12 @@ class MaterialFabMenuComponent extends Object
   }
 
   void _trigger(
-      {bool activateFirstItem = false, bool activateLastItem = false}) {
+      {bool activateFirstItem = false,
+      bool activateLastItem = false,
+      Event event}) {
     _activateFirstItemOnInit = activateFirstItem;
     _activateLastItemOnInit = activateLastItem;
-    _viewModel.trigger();
+    _viewModel.trigger(event);
   }
 
   void _hideMenuContent() {
@@ -245,11 +248,11 @@ class MaterialFabMenuModel {
 
   /// If the FAB has a sub-menu, then open the sub-menu popup, otherwise only
   /// trigger the action callback on the FAB menu item model.
-  void trigger() {
+  void trigger(Event event) {
     if (hasMenu) {
       _showPopup.value = true;
-    } else if (menuItem.action != null) {
-      menuItem.action();
+    } else if (menuItem.actionWithContext != null) {
+      menuItem.actionWithContext(event);
     }
   }
 

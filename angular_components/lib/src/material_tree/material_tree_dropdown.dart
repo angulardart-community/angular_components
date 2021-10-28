@@ -16,7 +16,6 @@ import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/material_popup/material_popup.dart';
 import 'package:angular_components/mixins/material_dropdown_base.dart';
 import 'package:angular_components/model/selection/select.dart';
-import 'package:angular_components/model/selection/selection_container.dart';
 import 'package:angular_components/model/selection/selection_model.dart';
 import 'package:angular_components/model/selection/selection_options.dart';
 import 'package:angular_components/model/ui/has_factory.dart';
@@ -49,10 +48,11 @@ import 'material_tree_impl.dart';
   ],
   templateUrl: 'material_tree_dropdown.html',
   styleUrls: ['material_tree_dropdown.scss.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   visibility: Visibility.all, // injected by clients,
 )
-class MaterialTreeDropdownComponent<T>
-    with DropdownHandle, MaterialTreeRoot<T>, SelectionContainer<T>
+class MaterialTreeDropdownComponent<T> extends MaterialTreeRootSelector<T>
+    with DropdownHandle
     implements OnInit, Focusable {
   // Popup positioning to use when filtering is enabled.
   static const List<Object /*RelativePosition | List<RelativePosition>*/ >
@@ -157,13 +157,6 @@ class MaterialTreeDropdownComponent<T>
     selection = SelectionModel<T>.empty();
   }
 
-  @Deprecated('Use [factoryRenderer] instead')
-  @Input()
-  @override
-  set componentRenderer(ComponentRenderer value) {
-    super.componentRenderer = value;
-  }
-
   /// Specifies the factoryRenderer to use to determine the factory for
   /// rendering an item.
   @Input()
@@ -184,13 +177,6 @@ class MaterialTreeDropdownComponent<T>
   @override
   set options(SelectionOptions<T> value) {
     super.options = value;
-  }
-
-  /// The selection model this container represents.
-  @Input()
-  @override
-  set selection(SelectionModel<T> value) {
-    super.selection = value;
   }
 
   /// Placeholder to be used for the dropdown text when nothing is selected.

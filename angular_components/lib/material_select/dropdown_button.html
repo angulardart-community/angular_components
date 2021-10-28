@@ -23,9 +23,9 @@
      [attr.aria-activedescendant]="ariaActiveDescendant">
   <span class="button-text" *ngIf="buttonText != null">{{buttonText}}</span>
   <ng-content></ng-content>
-  <glyph *ngIf="buttonIcon != null"
+  <material-icon *ngIf="buttonIcon != null"
          class="icon"
-         [icon]="buttonIcon"></glyph>
+         [icon]="buttonIcon"></material-icon>
 </div>
 <div class="error-text"
      role="alert"

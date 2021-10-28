@@ -8,9 +8,9 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:angular_components/button_decorator/button_decorator.dart';
 import 'package:angular_components/dynamic_component/dynamic_component.dart';
-import 'package:angular_components/glyph/glyph.dart';
 import 'package:angular_components/interfaces/has_disabled.dart';
 import 'package:angular_components/material_checkbox/material_checkbox.dart';
 import 'package:angular_components/material_select/activation_handler.dart';
@@ -34,7 +34,7 @@ import 'package:angular_components/utils/disposer/disposer.dart';
   ],
   styleUrls: ['material_select_item.scss.css'],
   directives: [
-    GlyphComponent,
+    MaterialIconComponent,
     MaterialCheckboxComponent,
     NgIf,
     DynamicComponent
@@ -47,7 +47,6 @@ class MaterialSelectItemComponent<T> extends ButtonDirective
         OnDestroy,
         SelectionItem<T>,
         HasRenderer<T>,
-        HasComponentRenderer,
         HasFactoryRenderer<RendersValue, T> {
   @HostBinding('class')
   static const hostClass = 'item';
@@ -118,12 +117,6 @@ class MaterialSelectItemComponent<T> extends ButtonDirective
   @override
   ItemRenderer<T> itemRenderer = nullRenderer;
 
-  @Input()
-  @override
-  @Deprecated('Use factoryrenderer instead as it will produce more '
-      'tree-shakeable code.')
-  ComponentRenderer componentRenderer;
-
   /// Returns a [ComponentFactory] for dynamic component loader to use to render
   /// an item.
   ///
@@ -165,8 +158,7 @@ class MaterialSelectItemComponent<T> extends ButtonDirective
   String get valueLabel {
     if (value == null) {
       return null;
-    } else if (componentRenderer == null &&
-        factoryRenderer == null &&
+    } else if (factoryRenderer == null &&
         !identical(itemRenderer, nullRenderer)) {
       return itemRenderer(value);
     }
@@ -202,10 +194,6 @@ class MaterialSelectItemComponent<T> extends ButtonDirective
   /// True by default.
   @Input()
   bool closeOnActivate = true;
-
-  // TODO(google): Remove after migration from ComponentRenderer is complete
-  Type get componentType =>
-      componentRenderer != null ? componentRenderer(value) : null;
 
   ComponentFactory get componentFactory =>
       factoryRenderer != null ? factoryRenderer(value) : null;

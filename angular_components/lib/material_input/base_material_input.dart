@@ -160,21 +160,6 @@ class BaseMaterialInput extends FocusableMixin
   @Input()
   int maxCount;
 
-  ValidityCheck _checkValid;
-  ValidityCheck get checkValid => _checkValid;
-  @Deprecated('Use angular2 forms API instead')
-  @Input()
-  set checkValid(ValidityCheck validFn) {
-    if (validFn == _checkValid) return; // Identical doesn't work on functions
-    _checkValid = validFn;
-    _changeDetector.markForCheck();
-    if (_cd?.control != null) {
-      // Validator was changed. Rerun validation.
-      _cd.control.updateValueAndValidity();
-    }
-    updateBottomPanelState();
-  }
-
   int _inputTextLength = 0;
   int get inputTextLength => _inputTextLength;
 
@@ -269,13 +254,6 @@ class BaseMaterialInput extends FocusableMixin
     if (maxCount != null && inputTextLength > maxCount) {
       _localValidationMessage = _errorMsg;
       return {materialInputErrorKey: _localValidationMessage};
-    }
-    if (checkValid != null) {
-      var _checkValidMessage = checkValid(inputText);
-      if (_checkValidMessage != null) {
-        _localValidationMessage = _checkValidMessage;
-        return {materialInputErrorKey: _localValidationMessage};
-      } // fallthrough
     }
     if (_invalid && useNativeValidation) {
       _localValidationMessage = _validationMessage;
@@ -424,7 +402,7 @@ class BaseMaterialInput extends FocusableMixin
   /// may be building new functionality that all ACX users could benefit
   /// from! If that's the case, please consider contributing your changes
   /// back upstream. Feel free to contact acx-widgets@ for more guidance.
-  ElementRef get inputRef => null;
+  Element get inputRef => null;
 
   @override
   void ngOnDestroy() {
@@ -490,7 +468,13 @@ class BaseMaterialInput extends FocusableMixin
 
   /// Selects all of the input's content.
   void selectAll() {
-    inputRef.nativeElement.select();
+    final inp = inputRef;
+
+    if (inp is InputElement) {
+      inp.select();
+    } else if (inp is TextAreaElement) {
+      inp.select();
+    }
   }
 
   @ViewChild(FocusableDirective)
@@ -554,14 +538,14 @@ class BaseSingleLineInputComponent extends BaseMaterialInput
   final ChangeDetectorRef _changeDetector;
 
   @ViewChild('inputEl')
-  ElementRef inputEl;
+  InputElement inputEl;
 
   @ViewChild('popupSourceEl')
-  ElementRef popupSourceEl;
+  HtmlElement popupSourceEl;
 
   /// Container element for popup positioning.
   @override
-  ElementRef get elementRef => popupSourceEl;
+  HtmlElement get element => popupSourceEl;
 
   /// The underlying <input> element.
   ///
@@ -570,7 +554,7 @@ class BaseSingleLineInputComponent extends BaseMaterialInput
   /// from! If that's the case, please consider contributing your changes
   /// back upstream. Feel free to contact acx-widgets@ for more guidance.
   @override
-  ElementRef get inputRef => inputEl;
+  InputElement get inputRef => inputEl;
 
   /// Type of input.
   ///

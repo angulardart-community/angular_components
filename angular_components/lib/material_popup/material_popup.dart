@@ -115,7 +115,7 @@ class MaterialPopupComponent extends Object
 
   // Needed to implement the PopupHierarchyElement interface.
   @override
-  final ElementRef elementRef;
+  final Element element;
 
   final String role;
   static final _idGenerator = SequentialIdGenerator.fromUUID();
@@ -265,7 +265,7 @@ class MaterialPopupComponent extends Object
       @Optional() this._popupSizeProvider,
       this._changeDetector,
       this._viewContainer,
-      this.elementRef)
+      this.element)
       : this.role = role ?? 'dialog' {
     // Close popup if parent closes.
     if (parentPopup != null) {
@@ -294,7 +294,7 @@ class MaterialPopupComponent extends Object
   void _updateOverlayCssClass() {
     if (_overlayRef == null) return;
     // Copy host CSS classes for integration with Angular CSS shimming.
-    var hostClassName = elementRef.nativeElement.className;
+    var hostClassName = element.className;
     _overlayRef.overlayElement.className += ' $hostClassName';
   }
 
@@ -857,8 +857,9 @@ class _DeferredToggleable extends Toggleable {
 //
 // TODO(google): This belongs as a utility not inlined here.
 Stream<List<T>> _mergeStreams<T>(List<Stream<T>> streams) {
-  var streamSubscriptions = List<StreamSubscription<T>>(streams.length);
-  var cachedResults = List<T>(streams.length);
+  var streamSubscriptions =
+      List<StreamSubscription<T>>.filled(streams.length, null);
+  var cachedResults = List<T>.filled(streams.length, null);
   StreamController<List<T>> streamController;
   streamController = StreamController<List<T>>.broadcast(
       sync: true,

@@ -10,7 +10,6 @@ library events;
 import 'dart:async';
 import 'dart:html';
 
-import 'package:angular/angular.dart';
 import 'package:js/js.dart';
 import 'package:js/js_util.dart' as js_util;
 import 'package:angular_components/utils/browser/feature_detector/feature_detector.dart';
@@ -47,8 +46,7 @@ typedef Predicate<T> = bool Function(T value);
 Predicate<T> not<T>(Predicate<T> predicate) => (value) => !predicate(value);
 
 /// A stream of click, mouseup or focus events outside a given element.
-Stream<Event> triggersOutside(dynamic /* Element | ElementRef */ element) {
-  if (element is ElementRef) element = element.nativeElement;
+Stream<Event> triggersOutside(Element element) {
   return triggersOutsideAny((node) => node == element);
 }
 

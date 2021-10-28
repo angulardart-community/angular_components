@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 // @dart=2.9
+import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/model/selection/select.dart';
@@ -10,6 +11,7 @@ import 'package:angular_components/model/selection/selection_container.dart';
 import 'package:angular_components/model/selection/selection_model.dart';
 import 'package:angular_components/model/selection/selection_options.dart';
 import 'package:angular_components/model/ui/has_factory.dart';
+import 'package:angular_components/utils/disposer/disposer.dart';
 
 import 'group/material_tree_group.dart';
 import 'group/material_tree_group_flat.dart';
@@ -48,8 +50,9 @@ import 'material_tree_root.dart';
   ],
   viewProviders: [ExistingProvider(MaterialTreeRoot, MaterialTreeComponent)],
   templateUrl: 'material_tree_impl.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class MaterialTreeComponent<T> with MaterialTreeRoot<T>, SelectionContainer<T> {
+class MaterialTreeComponent<T> extends MaterialTreeRootSelector<T> {
   /// Whether to hide check-marks in a single select dropdown
   @Input()
   @override
@@ -61,13 +64,6 @@ class MaterialTreeComponent<T> with MaterialTreeRoot<T>, SelectionContainer<T> {
       @Optional() @Self() this.renderingOptions)
       : optimizeForDropdown = parentTreeRoot?.optimizeForDropdown == true {
     selection = SelectionModel<T>.empty();
-  }
-
-  @Deprecated('Use [factoryRenderer] instead')
-  @Input()
-  @override
-  set componentRenderer(ComponentRenderer value) {
-    super.componentRenderer = value;
   }
 
   /// Specifies the factoryRenderer to use to determine the factory for
@@ -90,13 +86,6 @@ class MaterialTreeComponent<T> with MaterialTreeRoot<T>, SelectionContainer<T> {
   @override
   set options(SelectionOptions<T> value) {
     super.options = value;
-  }
-
-  /// The selection model this container represents.
-  @Input()
-  @override
-  set selection(SelectionModel<T> value) {
-    super.selection = value;
   }
 
   /// Whether to initially expand an option group.

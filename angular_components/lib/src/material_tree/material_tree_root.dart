@@ -4,21 +4,57 @@
 
 // @dart=2.9
 
+import 'dart:async';
+
+import 'package:angular/angular.dart';
 import 'package:angular_components/model/selection/select.dart';
 import 'package:angular_components/model/selection/selection_container.dart';
+import 'package:angular_components/model/selection/selection_model.dart';
 import 'package:angular_components/model/ui/has_factory.dart';
+import 'package:angular_components/utils/disposer/disposer.dart';
+
+// A base class for root tree selectors with output event already configured.
+abstract class MaterialTreeRootSelector<T>
+    with MaterialTreeRoot<T>, SelectionContainer<T>
+    implements OnDestroy {
+  final _selectionChanges =
+      StreamController<List<SelectionChangeRecord<T>>>.broadcast(sync: true);
+  final Disposer _disposer = Disposer.oneShot();
+
+  /// Fired when the selection changes.
+  @Output()
+  Stream<List<SelectionChangeRecord<T>>> get selectionChanges =>
+      _selectionChanges.stream;
+
+  /// The selection model this container represents.
+  @Input()
+  @override
+  set selection(SelectionModel<T> value) {
+    if (value != selection) {
+      super.selection = value;
+
+      if (value != null) {
+        _disposer.addStreamSubscription(
+            selection.selectionChanges.listen(_selectionChanges.add));
+      }
+    }
+  }
+
+  @override
+  void ngOnDestroy() => _disposer.dispose();
+}
 
 /// An limited interface for child groups to use to access the tree.
 abstract class MaterialTreeRoot<T>
-    implements
-        SelectionContainer<T>,
-        HasComponentRenderer<RendersValue, Object>,
-        HasFactoryRenderer<RendersValue, T> {
+    implements SelectionContainer<T>, HasFactoryRenderer<RendersValue, T> {
   /// Whether a filter is currently applied.
   bool isFiltered = false;
 
   /// Whether to hide check-marks in a single select dropdown
   bool get optimizeForDropdown => false;
+
+  /// Fired when the selection changes.
+  Stream<List<SelectionChangeRecord<T>>> get selectionChanges;
 
   /// Whether the widget supports searching the data set.
   ///

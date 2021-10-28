@@ -6,8 +6,6 @@
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/laminate/ruler/dom_ruler.dart';
-import 'package:angular_components/laminate/ruler/ng_ruler.dart';
-import 'package:angular_components/utils/angular/managed_zone/angular_2.dart';
 import 'package:angular_components/utils/browser/dom_service/angular_2.dart';
 import 'package:angular_components/utils/browser/window/module.dart';
 
@@ -22,6 +20,4 @@ const rulerModule = Module(include: [
 
 const _rulerProviders = [
   ClassProvider(DomRuler),
-  ClassProvider(ManagedZone, useClass: Angular2ManagedZone),
-  ClassProvider(NgRuler),
 ];

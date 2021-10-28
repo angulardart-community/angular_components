@@ -240,13 +240,6 @@ class MaterialDropdownSelectComponent<T> extends MaterialSelectBase<T>
   @Input()
   bool listAutoFocus = true;
 
-  @Input()
-  @override
-  @Deprecated('Use factoryRenderer it allows for more tree-shakable code.')
-  set componentRenderer(ComponentRenderer value) {
-    super.componentRenderer = value;
-  }
-
   /// Function that returns a component factory to render the Item.
   ///
   /// The resulting component must implement RendersValue.

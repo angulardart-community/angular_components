@@ -16,7 +16,6 @@ import 'package:angular_components/laminate/overlay/zindexer.dart';
 import 'package:angular_components/laminate/ruler/dom_ruler.dart';
 import 'package:angular_components/model/math/box.dart';
 import 'package:angular_components/utils/angular/imperative_view/imperative_view.dart';
-import 'package:angular_components/utils/angular/managed_zone/angular_2.dart';
 import 'package:angular_components/utils/browser/dom_service/angular_2.dart';
 import 'package:angular_components/utils/browser/window/module.dart';
 
@@ -91,7 +90,6 @@ const _overlayProviders = <Provider>[
   ClassProvider(AcxImperativeViewUtils),
   ClassProvider(DomRuler),
   domServiceBinding,
-  ClassProvider(ManagedZone, useClass: Angular2ManagedZone),
   FactoryProvider.forToken(overlayContainerName, getDefaultContainerName),
   FactoryProvider.forToken(overlayContainerToken, getDefaultContainer),
   FactoryProvider.forToken(overlayContainerParent, getOverlayContainerParent),

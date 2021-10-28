@@ -6,7 +6,7 @@
 
 part of angular_components.model.selection.selection_model;
 
-class _MultiSelectionModelImpl<T> extends Observable<ChangeRecord>
+class _MultiSelectionModelImpl<T> extends PropertyChangeNotifier
     with SelectionChangeNotifier<T>, CastIterable<T>
     implements MultiSelectionModel<T> {
   @override

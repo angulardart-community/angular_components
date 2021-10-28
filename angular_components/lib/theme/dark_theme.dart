@@ -13,14 +13,14 @@ import 'package:angular_components/theme/module.dart';
 /// active.
 const darkThemeClass = 'acx-theme-dark';
 
-/// Applies the dark theme class to an element, iff the dark theme is active.
+/// Applies the dark theme class to an element, if the dark theme is active.
 ///
 /// Use in conjunction with `@include acx-theme-dark`
 ///
 /// code:
 ///
-///     MyComponent(AcxTheme acxTheme, ElementRef myElementRef) {
-///       acxTheme.theme(myElementRef);
+///     MyComponent(AcxTheme acxTheme, HtmlElement myElementRe) {
+///       acxTheme.theme(myElementRe);
 ///     }
 ///
 /// sass:

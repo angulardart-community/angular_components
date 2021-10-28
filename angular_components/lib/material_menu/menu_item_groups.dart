@@ -271,8 +271,8 @@ class MenuItemGroupsComponent
     _selected.add(item);
   }
 
-  void select(MenuItem item, MenuItemGroup group) {
-    item.action?.call();
+  void select(Event event, MenuItem item, MenuItemGroup group) {
+    item.actionWithContext?.call(event);
 
     // Fire the event for activating the menu item. This does not mean the item
     // is selected, but merely that it was triggered (by mouse, keyboard, w/e).
@@ -377,7 +377,7 @@ class MenuItemGroupsComponent
     if (item.hasSubMenu) {
       _openSubMenu(item, isOpenedByKeyboard: event is KeyboardEvent);
     } else {
-      select(item, group);
+      select(event, item, group);
     }
   }
 

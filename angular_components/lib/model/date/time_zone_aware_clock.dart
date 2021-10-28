@@ -14,22 +14,14 @@ import 'package:quiver/time.dart';
 final _logger =
     Logger("third_party.dart_src.acx.model.date.time_zone_aware_clock");
 
-/// See [TimeZoneAwareClock].
-///
-/// Deprecated in favor of TimeZoneAwareClock, since having two ways to perform
-/// the same task is redundant, and since subclassing is more expressive.
-@Deprecated('use the TimeZoneAwareClock class instead')
-const timeZoneAwareClock = OpaqueToken<Clock>('timeZoneAwareClock');
-
-/// Provides [timeZoneAwareClock], an instance of [Clock] set to
+/// Provides an instance of [Clock] set to
 /// [SettableTimeZone], which can change at runtime.
 const timeZoneAwareClockProviders = <Provider>[
   FactoryProvider(SettableTimeZone, settableTimeZoneFactory),
-  ClassProvider(TimeZoneAwareClock),
-  ExistingProvider.forToken(timeZoneAwareClock, TimeZoneAwareClock),
+  ClassProvider(TimeZoneAwareClock)
 ];
 
-/// DI module for [timeZoneAwareClock].
+/// DI module for [Clock].
 const timeZoneAwareClockModule = Module(provide: timeZoneAwareClockProviders);
 
 /// Clock set to [SettableTimeZone], which can change at runtime.

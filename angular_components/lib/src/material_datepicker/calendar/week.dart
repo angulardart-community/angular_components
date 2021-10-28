@@ -27,7 +27,7 @@ class CalendarWeek extends _HasHighlights {
     } else {
       _days = _generateDays().toList();
     }
-    _spacers = List(numBlankDays);
+    _spacers = List.filled(numBlankDays, null);
     _updateHighlights();
   }
 

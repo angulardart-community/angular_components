@@ -26,14 +26,18 @@ import 'package:angular_components/material_progress/material_progress.dart';
   templateUrl: 'delayed_content.html',
   styleUrls: ['delayed_content.scss.css'],
   directives: [MaterialProgressComponent, NgIf],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   // TODO(google): Change preserveWhitespace to false to improve codesize.
   preserveWhitespace: true,
 )
 class DelayedContentComponent implements OnInit {
+  final ChangeDetectorRef _cd;
   bool resolved = true;
 
   @Input()
   int delay;
+
+  DelayedContentComponent(this._cd);
 
   @override
   void ngOnInit() {
@@ -47,5 +51,6 @@ class DelayedContentComponent implements OnInit {
 
   void _resolve() {
     resolved = true;
+    _cd.markForCheck();
   }
 }

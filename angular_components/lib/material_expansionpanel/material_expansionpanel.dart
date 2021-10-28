@@ -123,8 +123,8 @@ class MaterialExpansionPanel
   set focusOnOpenChild(dynamic element) {
     if (element is Focusable) {
       _focusOnOpenChild = element;
-    } else if (element is ElementRef) {
-      _focusOnOpenChild = RootFocusable(element.nativeElement);
+    } else if (element is Element) {
+      _focusOnOpenChild = RootFocusable(element);
     } else {
       assert(
           element == null,

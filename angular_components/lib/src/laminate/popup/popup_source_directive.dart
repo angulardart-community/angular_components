@@ -58,8 +58,8 @@ class PopupSourceDirective
 
   @override
   void ngAfterViewInit() {
-    // We have to wait until the view is inited to have elementRef
-    _element = _referenceDirective?.elementRef?.nativeElement ?? _element;
+    // We have to wait until the view is inited to have element
+    _element = _referenceDirective?.element ?? _element;
     _updateSource();
   }
 

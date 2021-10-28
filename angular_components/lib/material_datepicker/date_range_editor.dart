@@ -211,7 +211,7 @@ class DateRangeEditorComponent implements OnInit, AfterViewInit, Focusable {
   @Input()
   DateFormat activeDateFormat;
 
-  final Element _elementRef;
+  final Element _element;
   final DomService _domService;
   final NgZone _ngZone;
   MenuModel _presetsMenu;
@@ -329,7 +329,7 @@ class DateRangeEditorComponent implements OnInit, AfterViewInit, Focusable {
   Date _today;
 
   DateRangeEditorComponent(
-      this._elementRef,
+      this._element,
       this._domService,
       this._ngZone,
       @Optional() DateRangeEditorHost editorHost,
@@ -376,12 +376,12 @@ class DateRangeEditorComponent implements OnInit, AfterViewInit, Focusable {
     // adds 50-100 ms to latency because the animation frame doesn't get
     // triggered for a long time (since the main calendar init takes 100+ ms,
     // requestAnimationFrame() tries to render at 10 fps).
-    if (_elementRef.querySelector('.preset-list') != null) {
-      _elementRef
+    if (_element.querySelector('.preset-list') != null) {
+      _element
           .querySelector('.preset-list material-select-item.selected')
           ?.focus();
     } else {
-      _elementRef.querySelector('material-input.active input')?.focus();
+      _element.querySelector('material-input.active input')?.focus();
     }
   }
 
@@ -426,9 +426,8 @@ class DateRangeEditorComponent implements OnInit, AfterViewInit, Focusable {
           subitems.add(SelectableMenuItem(
               cssClasses: ['preset-dropdown-item'],
               value: alternative,
-              action: () {
-                // TODO(google): pass the event instead of null.
-                onAlternativePresetClicked(null, preset, alternative);
+              actionWithContext: (ev) {
+                onAlternativePresetClicked(ev, preset, alternative);
                 _presetSelection.select(alternative);
               },
               itemRenderer: _renderAlternativePreset,
@@ -445,10 +444,9 @@ class DateRangeEditorComponent implements OnInit, AfterViewInit, Focusable {
       bool isValid = _validPresets.contains(preset);
       items.add(SelectableMenuItem(
           value: preset,
-          action: () {
+          actionWithContext: (ev) {
             _presetSelection.select(preset);
-            // TODO(google): pass the event instead of null.
-            onRangeClicked(null, preset.range);
+            onRangeClicked(ev, preset.range);
           },
           itemRenderer: _renderPreset,
           tooltip: isValid ? null : rangeDisabledTooltip,

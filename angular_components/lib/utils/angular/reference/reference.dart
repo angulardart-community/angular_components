@@ -3,15 +3,16 @@
 // BSD-style license that can be found in the LICENSE file.
 
 // @dart=2.9
+import 'dart:html';
 
 import 'package:angular/angular.dart';
 
 // TODO(google): Remove this once use of '#' in a template is either
 // consistent, or has a way to declare specifically what you want - e.g. the
 // component instance or the element ref. Today, using # on an HTML element will
-// be an elementRef, but # on a component will be a component instance.
+// be an element itself, but # on a component will be a component instance.
 
-/// Place on an element or component to expose the [ElementRef] as 'ref'.
+/// Place on an element or component to expose the [Element] as 'ref'.
 ///
 /// Example usage:
 ///     <material-button ref #button="ref"></materialButton>
@@ -21,7 +22,7 @@ import 'package:angular/angular.dart';
   exportAs: 'ref',
 )
 class ReferenceDirective {
-  final ElementRef elementRef;
+  final Element element;
 
-  ReferenceDirective(this.elementRef);
+  ReferenceDirective(this.element);
 }

@@ -162,7 +162,7 @@ class MaterialRippleComponent implements OnDestroy {
   MaterialRippleComponent(this._element) {
     // These are initialized here instead of when they're declared because
     // dart2js would otherwise wait to initialize them until they are used.
-    _ripplePool ??= List<DivElement>(_maxRipples);
+    _ripplePool ??= List<DivElement>.filled(_maxRipples, null);
     _opacityTiming ??= {
       'duration': 300.0,
     };

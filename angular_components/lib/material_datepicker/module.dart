@@ -9,8 +9,6 @@ import 'package:quiver/time.dart';
 import 'package:angular_components/laminate/popup/module.dart';
 import 'package:angular_components/model/date/time_zone_aware_clock.dart';
 
-import 'model.dart';
-
 const clockValue = Clock();
 
 const datepickerClock = OpaqueToken<Clock>(
@@ -19,7 +17,7 @@ const datepickerClock = OpaqueToken<Clock>(
 /// Standard bindings needed by material datepicker components.
 ///
 /// The provided [Clock], and the datepicker itself, will both use the system
-/// time zone. Use [timeZoneAwareDatepickerProviders] if you need to set a
+/// time zone. Use [timeZoneAwareDatepickerModule] if you need to set a
 /// custom time zone.
 const datepickerBindings = [
   popupBindings,
@@ -27,29 +25,12 @@ const datepickerBindings = [
   ExistingProvider.forToken(datepickerClock, Clock),
 ];
 
-/// Bindings needed by material datepicker components, for clients who need to
-/// set a custom time zone.
-///
-/// Unlike [datepickerBindings], does not include [popupBindings]. You must
-/// provide [popupBindings] separately.
-///
-/// The provided [Clock] uses system time, but the datepicker will use the
-/// timezone indicated by [SettableTimeZone].
-///
-/// To use these bindings, you must initialize [SettableTimeZone] before
-/// constructing the datepicker, or console errors will occur.
-@Deprecated("use timeZoneAwareDatepickerModule")
-const timeZoneAwareDatepickerProviders = [
-  _sharedClockBindings,
-  timeZoneAwareClockProviders,
-];
-
 const timeZoneAwareDatepickerModule =
     Module(include: [timeZoneAwareClockModule], provide: _sharedClockBindings);
 
 const _sharedClockBindings = [
   _legacyClockBinding,
-  ExistingProvider.forToken(datepickerClock, timeZoneAwareClock),
+  ExistingProvider.forToken(datepickerClock, TimeZoneAwareClock),
 ];
 
 /// Binding for [Clock] without annotations. The datepicker no longer needs

@@ -15,20 +15,19 @@
   </material-checkbox>
   &ngsp;
   <span *ngIf="useCheckMarks" class="check-container">
-    <glyph *ngIf="isSelected"
+    <material-icon *ngIf="isSelected"
         baseline
         class="check"
         icon="check">
-    </glyph>
+    </material-icon>
   </span>
 </template>
 &ngsp;
 <span *ngIf="valueHasLabel" class="label">{{valueLabel}}</span>
 &ngsp;
-<dynamic-component *ngIf="componentType != null || componentFactory != null"
+<dynamic-component *ngIf="componentFactory != null"
     class="dynamic-item"
     (onLoad)="onLoadCustomComponent($event)"
-    [componentType]="componentType"
     [componentFactory]="componentFactory"
     [value]="value">
 </dynamic-component>

@@ -61,7 +61,7 @@ class MaterialMultilineInputComponent extends BaseMaterialInput
   StreamSubscription _subscription;
 
   @ViewChild('textareaEl')
-  ElementRef textareaEl;
+  TextAreaElement textareaEl;
 
   /// The underlying <textarea> element.
   ///
@@ -70,7 +70,7 @@ class MaterialMultilineInputComponent extends BaseMaterialInput
   /// from! If that's the case, please consider contributing your changes
   /// back upstream. Feel free to contact acx-widgets@ for more guidance.
   @override
-  ElementRef get inputRef => textareaEl;
+  TextAreaElement get inputRef => textareaEl;
 
   /// The initial/minimum number of rows for multiline input.
   /// Default value is 1.
@@ -97,32 +97,29 @@ class MaterialMultilineInputComponent extends BaseMaterialInput
   void focus() => super.focus();
 
   @ViewChild('popupSourceEl')
-  ElementRef popupSourceEl;
+  Element popupSourceEl;
 
   /// Container element for popup positioning.
   @override
-  ElementRef get elementRef => popupSourceEl;
+  Element get element => popupSourceEl;
 
   /// Text used to size the multiline textarea.
   String get mirrorText => (inputText ?? '') + '\n';
 
   @ViewChild('lineHeightMeasure')
-  set lineHeightMeasure(ElementRef value) {
+  set lineHeightMeasure(DivElement value) {
     // There's currently no strong use case of line height changing after it's
     // been measured. So we only measure it once when the view is rendered.
     _domService.scheduleRead(() {
       var isDestroyed = textareaEl == null;
       if (isDestroyed) return;
 
-      var height = (value.nativeElement as Element).clientHeight;
+      var height = value.clientHeight;
       if (height != 0) {
         _inputLineHeight = height;
         _subscription?.cancel();
         _subscription = null;
-        _changeDetector
-          ..markForCheck()
-          // TODO(google): remove after the bug is fixed.
-          ..detectChanges();
+        _changeDetector.markForCheck();
       } else if (_subscription == null) {
         // Listen to dom changes until we can read the line height.
         _subscription = _domService.onLayoutChanged.listen((_) {

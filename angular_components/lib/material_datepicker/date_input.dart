@@ -12,6 +12,7 @@ import 'package:quiver/time.dart';
 import 'package:angular_components/material_input/material_input.dart';
 import 'package:angular_components/model/date/date.dart';
 import 'package:angular_components/utils/disposer/disposer.dart';
+import 'package:angular_forms/angular_forms.dart';
 
 import 'calendar.dart';
 import 'module.dart';
@@ -35,8 +36,11 @@ import 'module.dart';
 /// input, or this won't work.
 @Directive(
   selector: 'material-input[dateParsing]',
+  providers: [ExistingProvider.forToken(NG_VALIDATORS, DateInputDirective)],
+  // TODO(google): Change to `Visibility.local` to reduce code size.
+  visibility: Visibility.all,
 )
-class DateInputDirective implements OnDestroy {
+class DateInputDirective implements OnDestroy, Validator {
   /// Various recognized input formats.
   final _inputFormats = [
     DateFormat.yMMMd(), // 'Jan 23, 2015'
@@ -182,7 +186,6 @@ class DateInputDirective implements OnDestroy {
     _disposer.addStreamSubscription(_input.onChange
         .listen((String input) => _parseDate(input, setAsCurrent: true)));
 
-    _input.checkValid = (String input) => _parseDateCached(input);
     _input.requiredErrorMsg = invalidDateMsg;
   }
 
@@ -227,7 +230,13 @@ class DateInputDirective implements OnDestroy {
 
   /// A cache for _parseDate, to speed up change detection.
   /// Does not update [date] or change the textbox contents.
-  String _parseDateCached(String input) {
+  @override
+  Map<String, Object> validate(AbstractControl control) {
+    if (control.value == null) {
+      return null; // Handled by accessor validator
+    }
+
+    String input = control.value;
     var minOrMaxDateChanged =
         minDate != _cachedMinDate || maxDate != _cachedMaxDate;
     if (minOrMaxDateChanged) {
@@ -240,7 +249,7 @@ class DateInputDirective implements OnDestroy {
       _cachedResult = _parseDate(input, setAsCurrent: false);
       _cachedInput = input;
     }
-    return _cachedResult;
+    return {materialInputErrorKey: _cachedResult};
   }
 
   /// Parse the given string as a date, perform fixup, and check date limits.

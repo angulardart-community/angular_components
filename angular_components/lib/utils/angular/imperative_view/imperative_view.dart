@@ -28,11 +28,11 @@ import 'package:angular_components/utils/disposer/disposer.dart';
 ///     )
 ///     class ImperativeListComponent {
 ///       final AcxImperativeViewUtils _imperativeViewUtils;
-///       final ElementRef _elementRef;
+///       final Element _element;
 ///       final _listElement = new Element.ul();
 ///
-///       ImperativeListComponent(this._imperativeViewUtils, this._elementRef) {
-///         _dynamicViewUtils.useAsImperativeView(_elementRef, _listElement);
+///       ImperativeListComponent(this._imperativeViewUtils, this._element) {
+///         _dynamicViewUtils.useAsImperativeView(_element, _listElement);
 ///       }
 ///
 ///       set items(List<String> items) {
@@ -41,7 +41,7 @@ import 'package:angular_components/utils/disposer/disposer.dart';
 ///           final itemElement = new Element.li();
 ///           _imperativeViewUtils.insertAngularComponent(
 ///               ItemComponent,
-///               _elementRef,
+///               _element,
 ///               itemElement).then((ComponentRef componentRef) =>
 ///                   componentRef.instance = item);
 ///           _listElement.append(itemElement);

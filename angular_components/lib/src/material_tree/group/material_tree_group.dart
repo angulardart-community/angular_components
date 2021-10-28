@@ -7,6 +7,7 @@
 import 'dart:html';
 
 import 'package:angular/angular.dart';
+import 'package:angular_components/utils/disposer/disposer.dart';
 import 'package:intl/intl.dart';
 import 'package:angular_components/button_decorator/button_decorator.dart';
 import 'package:angular_components/dynamic_component/dynamic_component.dart';
@@ -45,6 +46,7 @@ const materialTreeLeftPaddingToken =
   ],
   templateUrl: 'material_tree_group.html',
   styleUrls: ['material_tree_group.scss.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class MaterialTreeGroupComponent<T> extends MaterialTreeNode<T>
     implements OnDestroy {
@@ -70,6 +72,7 @@ class MaterialTreeGroupComponent<T> extends MaterialTreeNode<T>
   @Input()
   bool deselectOnTrigger = true;
   final MaterialTreeRoot _root;
+  final _disposer = Disposer.oneShot();
 
   int _maxInitialOptionsShown;
 
@@ -110,7 +113,11 @@ class MaterialTreeGroupComponent<T> extends MaterialTreeNode<T>
       @Inject(materialTreeLeftPaddingToken)
           int constantLeftPadding])
       : fixedPadding = '${constantLeftPadding ?? defaultConstantLeftPadding}px',
-        super(_root, changeDetector);
+        super(_root, changeDetector) {
+    _disposer.addStreamSubscription(_root.selectionChanges.listen((ev) {
+      changeDetector.markForCheck();
+    }));
+  }
 
   // This is only used to standardize all the different group components.
   @HostBinding('class.material-tree-group')
@@ -207,6 +214,7 @@ class MaterialTreeGroupComponent<T> extends MaterialTreeNode<T>
 
   @override
   void ngOnDestroy() {
+    _disposer.dispose();
     onDestroy();
   }
 

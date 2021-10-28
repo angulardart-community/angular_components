@@ -164,7 +164,7 @@ class MaterialMenuDemoComponent implements OnDestroy {
                       icon: Icon('help_outline'),
                       visibility: IconVisibility.hover)
                 ]),
-                action: () => window.alert('halp!')),
+                actionWithContext: (ev) => window.alert('halp!')),
           ]),
         ]));
 
@@ -219,20 +219,25 @@ class MaterialMenuDemoComponent implements OnDestroy {
             subMenu: MenuModel<MenuItem>([
               MenuItemGroup<MenuItem>([
                 MenuItem('Almost new',
-                    enabled: false, action: () => window.alert('almost new!')),
-                MenuItem('Used', action: () => window.alert('used!')),
-                MenuItem('New', action: () => window.alert('new!')),
+                    enabled: false,
+                    actionWithContext: (_) => window.alert('almost new!')),
+                MenuItem('Used',
+                    actionWithContext: (_) => window.alert('used!')),
+                MenuItem('New', actionWithContext: (_) => window.alert('new!')),
               ])
             ])),
         MenuItem('Advertise',
             subMenu: MenuModel<MenuItem>([
               MenuItemGroup<MenuItem>([
                 MenuItem('Google',
-                    enabled: false, action: () => window.alert('google!')),
+                    enabled: false,
+                    actionWithContext: (_) => window.alert('google!')),
                 MenuItem('Facebook',
-                    enabled: false, action: () => window.alert('facebook!')),
+                    enabled: false,
+                    actionWithContext: (_) => window.alert('facebook!')),
                 MenuItem('Craigslist',
-                    enabled: false, action: () => window.alert('craigslist!')),
+                    enabled: false,
+                    actionWithContext: (_) => window.alert('craigslist!')),
               ])
             ])),
         MenuItem('Sell'),
@@ -241,9 +246,10 @@ class MaterialMenuDemoComponent implements OnDestroy {
 
     final menuModelWithAffixes = MenuModel<MenuItem>([
       MenuItemGroup<MenuItem>([
-        MenuItem('With no suffixes', action: () => window.alert('1')),
+        MenuItem('With no suffixes',
+            actionWithContext: (_) => window.alert('1')),
         MenuItem('With an icon suffix',
-            action: () => window.alert('2'),
+            actionWithContext: (_) => window.alert('2'),
             itemSuffixes: ObservableList.from([
               IconAffix.withAction(
                   icon: Icon('delete'),
@@ -252,11 +258,11 @@ class MaterialMenuDemoComponent implements OnDestroy {
                   shouldCloseMenuOnTrigger: true)
             ])),
         MenuItem('With text suffix',
-            action: () => window.alert('3'),
+            actionWithContext: (_) => window.alert('3'),
             itemSuffixes:
                 ObservableList.from([CaptionAffix(text: 'Ctrl + V')])),
         MenuItem('With multiple suffixes',
-            action: () => window.alert('4'),
+            actionWithContext: (_) => window.alert('4'),
             itemSuffixes: ObservableList.from([
               IconAffix.withAction(
                   icon: Icon('delete'),

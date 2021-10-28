@@ -19,7 +19,6 @@ import 'focus/focus_item.dart';
 import 'focus/focus_list.dart';
 import 'focus/focus_trap.dart';
 import 'focus/keyboard_only_focus_indicator.dart';
-import 'glyph/glyph.dart';
 import 'highlighted_text/highlighted_text.dart';
 import 'highlighted_text/highlighted_value.dart';
 import 'laminate/components/modal/modal.dart';
@@ -105,7 +104,6 @@ export 'focus/focus_list.dart';
 export 'focus/focus_trap.dart';
 export 'focus/keyboard_only_focus_indicator.dart';
 export 'forms/error_renderer.dart';
-export 'glyph/glyph.dart';
 export 'highlighted_text/highlighted_text.dart';
 export 'highlighted_text/highlighted_value.dart';
 export 'laminate/components/modal/modal.dart';
@@ -241,7 +239,6 @@ const List<dynamic> materialDirectives = [
   FocusListDirective,
   FocusableDirective,
   FocusTrapComponent,
-  GlyphComponent,
   HighlightedTextComponent,
   HighlightedValueComponent,
   KeyboardOnlyFocusIndicatorDirective,

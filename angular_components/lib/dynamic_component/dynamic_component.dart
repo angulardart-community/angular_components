@@ -36,7 +36,6 @@ class DynamicComponent implements OnDestroy, AfterChanges {
   }
 
   ComponentRef _childComponent;
-  Type _componentType;
   bool _typeChanged = false;
   ComponentFactory _componentFactory;
   bool _factoryChanged = false;
@@ -62,14 +61,6 @@ class DynamicComponent implements OnDestroy, AfterChanges {
   void _disposeChildComponent() {
     _childComponent?.destroy();
     _childComponent = null;
-  }
-
-  /// The type of component to dynamically render.
-  @Deprecated('Use componentFactory instead as it is more tree-shakable')
-  @Input()
-  set componentType(Type dartType) {
-    if (_componentType != dartType) _typeChanged = true;
-    _componentType = dartType;
   }
 
   /// The component factory of the component to dynamically render.
