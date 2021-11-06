@@ -42,8 +42,8 @@ Example packages for each of the components. Additionally, the
 [examples/angular_components_example] subdirectory contains the base package
 for building the AngularDart gallery.
 
-[angular_components]: (https://github.com/angulardart/angular_components/tree/master/angular_components)
-[angular_gallery]: (https://github.com/angulardart/angular_components/tree/master/angular_gallery)
-[angular_gallery_section]: (https://github.com/angulardart/angular_components/tree/master/angular_gallery_section)
-[examples]: (https://github.com/angulardart/angular_components/tree/master/examples)
-[examples/angular_components_example]: (https://github.com/angulardart/angular_components/tree/master/examples/angular_components_example)
+[angular_components]: (https://github.com/angulardart-community/angular_components/tree/master/angular_components)
+[angular_gallery]: (https://github.com/angulardart-community/angular_components/tree/master/angular_gallery)
+[angular_gallery_section]: (https://github.com/angulardart-community/angular_components/tree/master/angular_gallery_section)
+[examples]: (https://github.com/angulardart-community/angular_components/tree/master/examples)
+[examples/angular_components_example]: (https://github.com/angulardart-community/angular_components/tree/master/examples/angular_components_example)
