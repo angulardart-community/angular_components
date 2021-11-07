@@ -9,7 +9,7 @@ Googlers, make debugging and deploying your app easier. Strict latency and
 testing policies make these widgets an excellent fit for projects using the
 Angular package.
 
-**Disclaimer**: This project is now maintained by the [Angular Community]. This
+**Disclaimer**: This project is now maintained by the [AngularDart Community]. This
 is not a Google product in any way, official or unofficial.
 
 [Material design]: https://material.io/guidelines
