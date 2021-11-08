@@ -1,11 +1,11 @@
 targets:
-  angular_components:
+  ngcomponents:
     sources:
       exclude: ["lib/builder.dart"]
     builders:
       sass_builder|sass_builder:
         enabled: False
-      angular_components|scss_builder:
+      ngcomponents|scss_builder:
         enabled: True
   scss_builder:
     sources: ["lib/builder.dart"]
