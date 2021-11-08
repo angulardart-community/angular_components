@@ -9,6 +9,7 @@ github:
         - main
         - master
         - null-safety
+        - v1.1.0
     pull_request:
   # cron: '0 0 * * 0' # “At 00:00 (UTC) on Sunday.” # Conflict with `on`
   stages:

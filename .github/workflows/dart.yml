@@ -6,6 +6,7 @@ on:
       - main
       - master
       - null-safety
+      - v1.1.0
   pull_request:
 defaults:
   run:
