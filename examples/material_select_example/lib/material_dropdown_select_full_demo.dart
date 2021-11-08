@@ -7,22 +7,22 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
-import 'package:angular_components/laminate/enums/alignment.dart';
-import 'package:angular_components/laminate/popup/module.dart';
-import 'package:angular_components/material_checkbox/material_checkbox.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
-import 'package:angular_components/material_input/material_input.dart';
-import 'package:angular_components/material_select/dropdown_button.dart';
-import 'package:angular_components/material_select/material_dropdown_select.dart';
-import 'package:angular_components/material_select/material_dropdown_select_accessor.dart';
-import 'package:angular_components/material_select/material_select_dropdown_item.dart';
-import 'package:angular_components/material_select/material_select_searchbox.dart';
-import 'package:angular_components/model/selection/select.dart';
-import 'package:angular_components/model/selection/selection_model.dart';
-import 'package:angular_components/model/selection/selection_options.dart';
-import 'package:angular_components/model/selection/string_selection_options.dart';
-import 'package:angular_components/model/ui/display_name.dart';
-import 'package:angular_components/model/ui/has_factory.dart';
+import 'package:ngcomponents/laminate/enums/alignment.dart';
+import 'package:ngcomponents/laminate/popup/module.dart';
+import 'package:ngcomponents/material_checkbox/material_checkbox.dart';
+import 'package:ngcomponents/material_icon/material_icon.dart';
+import 'package:ngcomponents/material_input/material_input.dart';
+import 'package:ngcomponents/material_select/dropdown_button.dart';
+import 'package:ngcomponents/material_select/material_dropdown_select.dart';
+import 'package:ngcomponents/material_select/material_dropdown_select_accessor.dart';
+import 'package:ngcomponents/material_select/material_select_dropdown_item.dart';
+import 'package:ngcomponents/material_select/material_select_searchbox.dart';
+import 'package:ngcomponents/model/selection/select.dart';
+import 'package:ngcomponents/model/selection/selection_model.dart';
+import 'package:ngcomponents/model/selection/selection_options.dart';
+import 'package:ngcomponents/model/selection/string_selection_options.dart';
+import 'package:ngcomponents/model/ui/display_name.dart';
+import 'package:ngcomponents/model/ui/has_factory.dart';
 
 import 'material_dropdown_select_full_demo.template.dart' as demo;
 

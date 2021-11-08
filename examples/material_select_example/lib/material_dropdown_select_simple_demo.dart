@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_select/material_dropdown_select.dart';
+import 'package:ngcomponents/material_select/material_dropdown_select.dart';
 
 @Component(
   selector: 'material-dropdown-select-simple-demo',

@@ -1,0 +1,211 @@
+// Copyright (c) 2016, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+@import 'package:ngcomponents/css/material/material';
+@import 'package:ngcomponents/css/material/shadow';
+
+.panel {
+  @include shadow-elevation;
+  background-color: $mat-white;
+  margin: 0;
+  transition: margin $mat-transition-slow $mat-transition-standard;
+  width: inherit;
+}
+
+:host:not([hidden]) {
+  display: block;
+}
+
+:host[flat] .panel {
+  box-shadow: none;
+  border: 1px solid $mat-border-light;
+}
+
+:host[wide] .panel {
+  @include shadow-elevation;
+  background-color: $mat-white;
+  margin: 0 $mat-grid * 3;
+  transition: margin $mat-transition-slow $mat-transition-standard;
+}
+
+.panel.open,
+:host[wide] .panel.open {
+  @include shadow-elevation;
+  background-color: $mat-white;
+  // When opened, add vertical margins, and remove any horizontal margins. This
+  // produces the expansion effect.
+  margin: $mat-grid * 2 0;
+}
+
+:host[flat] .panel.open {
+  box-shadow: none;
+  margin: 0;
+}
+
+.expand-button {
+  user-select: none;
+  color: $mat-grey-700;
+  cursor: pointer;
+  transition: transform $mat-transition-slow $mat-transition-standard;
+
+  &.expand-more {
+    transform: rotate(180deg);
+  }
+
+  &.expand-on-left {
+    margin: 0 $mat-grid-type 0 0;
+  }
+}
+
+// It is impossible to change 'just' the transition function for visibility in hte hidden style,
+// so use a mixin to keep everything consistent except that.
+@mixin header-transition($visibility_function) {
+  transition: height $mat-transition $mat-transition-standard,
+  min-height $mat-transition $mat-transition-standard,
+  opacity $mat-transition-slow $mat-transition-standard,
+  visibility $mat-transition-slow $visibility_function;
+}
+
+header {
+  display: flex;
+  color: $mat-transparent-black;
+  // When switching to expanded, turn visibility on at the start.
+  @include header-transition(step-start);
+  visibility: inherit;
+
+  &.hidden {
+    min-height: 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    // When switching to hidden, don't turn off visibility until the end.
+    @include header-transition(step-end);
+    visibility: hidden;
+  }
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  // TODO(google): Migrate to extended mixin mat-font-subhead
+  font-size: $mat-font-size-subhead;
+  font-weight: $mat-font-weight-regular;
+  cursor: pointer;
+  min-height: $mat-grid * 6;
+  min-width: 0;
+  padding: 0 $mat-grid * 3;
+  transition: min-height $mat-transition $mat-transition-standard;
+
+  &.closed:not(.is-disabled) {
+    &:hover,
+    &:focus {
+      background-color: $mat-grey-200;
+    }
+  }
+
+  &.disable-header-expansion,
+  &.is-disabled {
+    cursor: default;
+  }
+}
+
+.panel.open > header:not(.hidden) > .header {
+  min-height: $mat-grid * 8;
+}
+
+.background,
+:host[wide] .background {
+  background-color: $mat-grey-100;
+}
+
+.panel-name {
+  padding-right: $mat-grid * 2;
+  min-width: 20%;
+
+  .primary-text {
+    margin: 0;
+  }
+
+  .secondary-text {
+    // TODO(google): Migrate to extended mixin mat-font-caption
+    font-size: $mat-font-size-caption;
+    font-weight: $mat-font-weight-regular;
+    color: $mat-light-transparent-black;
+    margin: 0;
+  }
+}
+
+.panel-description {
+  flex-grow: 1;
+  color: $mat-light-transparent-black;
+  overflow: hidden;
+  padding-right: $mat-grid * 2;
+}
+
+// It is impossible to change 'just' the transition function for visibility in hte hidden style,
+// so use a mixin to keep everything consistent except that.
+@mixin main-transition($visibility-function) {
+  transition: height $mat-transition $mat-transition-standard,
+              opacity $mat-transition $mat-transition-standard,
+              visibility $mat-transition $visibility-function;
+}
+
+main {
+  opacity: 1;
+  overflow: hidden;
+  // When switching to expanded, turn visibility on at the start.
+  @include main-transition(step-start);
+  visibility: inherit;
+  width: 100%;
+
+  &.hidden {
+    height: 0;
+    opacity: 0;
+    // When switching to hidden, don't turn off visibility until the end.
+    @include main-transition(step-end);
+    visibility: hidden;
+  }
+}
+
+.content-wrapper {
+  display: flex;
+  margin: 0 $mat-grid * 3 $mat-grid * 2;
+
+  &.hidden-header {
+    margin-top: $mat-grid * 2;
+  }
+
+  > .expand-button {
+    align-self: flex-start;
+    flex-shrink: 0;
+    margin-left: $mat-grid * 2;
+
+    &.expand-on-left {
+      margin: 0 $mat-grid-type 0 0;
+    }
+  }
+}
+
+.content {
+  flex-grow: 1;
+  overflow: hidden;
+  width: 100%;
+}
+
+%toolbelt {
+  box-sizing: border-box;
+  border-top: 1px $mat-border-light solid;
+  padding: $mat-grid * 2 0;
+  width: 100%;
+}
+
+.toolbelt ::ng-deep [toolbelt] {
+  @extend %toolbelt;
+}
+
+.action-buttons {
+  @extend %toolbelt;
+  color: $mat-blue;
+}

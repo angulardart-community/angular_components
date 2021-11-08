@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:angular_components/material_tree/material_tree.dart';
+import 'package:ngcomponents/material_tree/material_tree.dart';
 import 'material_tree_shared.dart';
 import 'package:angular_gallery_section/annotation/gallery_section_config.dart';
 

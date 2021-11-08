@@ -4,12 +4,12 @@
 
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
-import 'package:angular_components/annotations/rtl_annotation.dart';
-import 'package:angular_components/material_input/material_number_accessor.dart';
+import 'package:ngcomponents/annotations/rtl_annotation.dart';
+import 'package:ngcomponents/material_input/material_number_accessor.dart';
 import 'package:angular_gallery_section/annotation/gallery_section_config.dart';
-import 'package:angular_components/scorecard/scoreboard.dart';
-import 'package:angular_components/scorecard/scorecard.dart';
-import 'package:angular_components/utils/color/material.dart';
+import 'package:ngcomponents/scorecard/scoreboard.dart';
+import 'package:ngcomponents/scorecard/scorecard.dart';
+import 'package:ngcomponents/utils/color/material.dart';
 
 @GallerySectionConfig(
   displayName: 'Scorecard',

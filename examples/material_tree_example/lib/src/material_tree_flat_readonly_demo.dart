@@ -3,9 +3,9 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_tree/material_tree.dart';
+import 'package:ngcomponents/material_tree/material_tree.dart';
 import 'material_tree_demo_options.dart' as data;
-import 'package:angular_components/model/selection/selection_options.dart';
+import 'package:ngcomponents/model/selection/selection_options.dart';
 
 /// An example that renders a [MaterialTreeComponent] with flat options.
 @Component(

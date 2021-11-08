@@ -1,0 +1,139 @@
+// Copyright (c) 2016, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+@import 'package:ngcomponents/material_button/mixins';
+@import 'package:ngcomponents/material_list/mixins';
+@import 'package:ngcomponents/material_select/mixins';
+
+/// Sets the height of menu-item
+@mixin item-height($selector, $height) {
+  #{$selector} ::ng-deep .menu-item {
+    height: $height;
+  }
+}
+
+/// Hides underline for button text from dropdown-button widget.
+@mixin dropdown-menu-nounderline {
+  ::ng-deep dropdown-button {
+    @include button-look;
+  }
+}
+
+@mixin dropdown-menu-nounderline-no-opacity {
+  ::ng-deep dropdown-button {
+    .button.border {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+
+@mixin material-menu-trigger-no-uppercase {
+  ::ng-deep .trigger-button {
+    text-transform: inherit;
+  }
+}
+
+@mixin menu-item-affix-hover {
+  ::ng-deep .secondary-icon.hover-icon {
+    opacity: inherit;
+  }
+}
+
+// Sets the background color of the selected menu item.
+@mixin material-menu-selected-item-background-color($color) {
+  ::ng-deep {
+    material-select-item:not(.multiselect).selected.menu-item {
+      background-color: $color;
+    }
+  }
+}
+
+/// Sets overflow to ellipsis for menu items.
+@mixin material-menu-item-ellipsis() {
+  ::ng-deep material-select-item .menu-item-label-section {
+    overflow: hidden;
+
+    .menu-item-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+// Makes sure that content will wrap if the label is too wide.
+@mixin menu-item-text-wrap {
+  ::ng-deep .menu-item-label {
+    white-space: normal;
+  }
+
+  ::ng-deep .menu-item-secondary-label {
+    white-space: normal;
+  }
+}
+
+// No default border on menu item groups unless explicitly specified.
+@mixin menu-item-group-no-default-border {
+  ::ng-deep {
+    .group:not(.has-separator):not(.empty)
+        + .group:not(script):not(template):not(.empty) {
+      border-top: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+@mixin menu-item-group-label-font {
+  ::ng-deep {
+    .group {
+      > .group-header {
+        @include list-item-base();
+        color: $mat-transparent-black;;
+        display: flex;
+        height: auto;
+        text-transform: none;
+      }
+
+      // Use more left padding to show this is the sub-level element of
+      // the group since the font is the same now.
+      &.has-label > .menu-item {
+        padding-left: $list-item-padding * 1.5;
+      }
+    }
+  }
+}
+
+// Changes the icon color of .menu-item. $selector should be one of the css
+// classes passed in through MenuItem.
+@mixin menu-item-icon-color($selector, $color) {
+  ::ng-deep #{$selector}.menu-item material-icon.material-list-item-primary {
+    color: $color;
+  }
+}
+
+// Creates a menu item with a custom icon.
+// Everything but $svg-path is optional. Use $selector to add additional
+// specificity, $svg-size to control the size of the svg itself, and
+// $icon-section-size to control the width of the entire icon container
+// (effectively adding padding between the icon and text). If left unspecified,
+// sizes will follow the normal behavior for an icon inside of a menu item.
+@mixin menu-item-custom-svg-icon($svg-path,
+    $selector: '',
+    $svg-size: null,
+    $icon-section-size: null) {
+  ::ng-deep #{$selector}.menu-item material-icon.material-list-item-primary {
+    @include svg-icon(inline-image($svg-path));
+    @include svg-icon-size($svg-size);
+    width: $icon-section-size;
+  }
+}
+
+// Sets the color of the label annotation. $selector should be one of the css
+// classes passed in through MenuItem.
+@mixin label-annotation-color($selector, $color) {
+  ::ng-deep #{$selector}.menu-item .menu-item-label-section .label-annotation {
+    color: $color;
+  }
+}

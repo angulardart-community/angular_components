@@ -5,8 +5,8 @@
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:intl/intl.dart';
-import 'package:angular_components/material_button/material_fab.dart';
-import 'package:angular_components/material_input/material_number_accessor.dart';
+import 'package:ngcomponents/material_button/material_fab.dart';
+import 'package:ngcomponents/material_input/material_number_accessor.dart';
 
 @Component(
   selector: 'material-input-number-value-accessor-demo',

@@ -3,11 +3,11 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_datepicker/calendar.dart';
-import 'package:angular_components/material_datepicker/material_calendar_picker.dart';
-import 'package:angular_components/material_datepicker/module.dart';
-import 'package:angular_components/model/date/date.dart';
-import 'package:angular_components/utils/browser/window/module.dart';
+import 'package:ngcomponents/material_datepicker/calendar.dart';
+import 'package:ngcomponents/material_datepicker/material_calendar_picker.dart';
+import 'package:ngcomponents/material_datepicker/module.dart';
+import 'package:ngcomponents/model/date/date.dart';
+import 'package:ngcomponents/utils/browser/window/module.dart';
 
 @Component(
   selector: 'material-calendar-picker-demo',

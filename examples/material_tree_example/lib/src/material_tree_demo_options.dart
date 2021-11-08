@@ -2,11 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:angular_components/src/material_tree/material_tree_expand_state.dart';
-import 'package:angular_components/model/selection/select.dart';
-import 'package:angular_components/model/selection/selection_options.dart';
-import 'package:angular_components/model/selection/string_selection_options.dart';
-import 'package:angular_components/utils/async/async.dart';
+import 'package:ngcomponents/src/material_tree/material_tree_expand_state.dart';
+import 'package:ngcomponents/model/selection/select.dart';
+import 'package:ngcomponents/model/selection/selection_options.dart';
+import 'package:ngcomponents/model/selection/string_selection_options.dart';
+import 'package:ngcomponents/utils/async/async.dart';
 
 final _commonOptionList = [
   'Pinocchio',

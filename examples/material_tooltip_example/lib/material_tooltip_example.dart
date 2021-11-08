@@ -3,19 +3,19 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/content/deferred_content.dart';
-import 'package:angular_components/focus/keyboard_only_focus_indicator.dart';
-import 'package:angular_components/laminate/enums/alignment.dart';
-import 'package:angular_components/laminate/popup/module.dart';
-import 'package:angular_components/material_button/material_button.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
-import 'package:angular_components/material_input/material_input.dart';
-import 'package:angular_components/material_popup/material_popup.dart';
-import 'package:angular_components/material_tooltip/material_tooltip.dart';
-import 'package:angular_components/material_tooltip/module.dart' as tooltip;
+import 'package:ngcomponents/content/deferred_content.dart';
+import 'package:ngcomponents/focus/keyboard_only_focus_indicator.dart';
+import 'package:ngcomponents/laminate/enums/alignment.dart';
+import 'package:ngcomponents/laminate/popup/module.dart';
+import 'package:ngcomponents/material_button/material_button.dart';
+import 'package:ngcomponents/material_icon/material_icon.dart';
+import 'package:ngcomponents/material_input/material_input.dart';
+import 'package:ngcomponents/material_popup/material_popup.dart';
+import 'package:ngcomponents/material_tooltip/material_tooltip.dart';
+import 'package:ngcomponents/material_tooltip/module.dart' as tooltip;
 import 'package:angular_gallery_section/annotation/gallery_section_config.dart';
 import 'package:angular_gallery_section/components/content/delayed_content.dart';
-import 'package:angular_components/theme/dark_theme.dart';
+import 'package:ngcomponents/theme/dark_theme.dart';
 
 @GallerySectionConfig(
   displayName: 'Material Tooltip',

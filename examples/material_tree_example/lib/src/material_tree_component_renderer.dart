@@ -3,8 +3,8 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
-import 'package:angular_components/model/ui/has_renderer.dart';
+import 'package:ngcomponents/material_icon/material_icon.dart';
+import 'package:ngcomponents/model/ui/has_renderer.dart';
 
 /// An example component renderer that adds an android icon.
 @Component(

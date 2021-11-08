@@ -1,0 +1,164 @@
+// Copyright (c) 2016, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+@use "sass:math";
+
+@import 'package:ngcomponents/css/material/material';
+@import 'package:ngcomponents/css/material/shadow';
+
+@mixin material-dialog-header-color($color) {
+  ::ng-deep .wrapper > header,
+  &[headered] ::ng-deep .wrapper > header {
+    background-color: $color;
+  }
+}
+
+@mixin material-dialog-header-shadow() {
+  ::ng-deep .wrapper > header {
+    @include shadow-elevation;
+  }
+}
+
+@mixin material-dialog-header-padding($padding: 0) {
+  ::ng-deep .wrapper > header,
+  &[headered] ::ng-deep .wrapper > header {
+    padding: $padding;
+  }
+}
+
+@mixin material-dialog-header-border-bottom($border) {
+  ::ng-deep .wrapper > header {
+    border-bottom: $border;
+  }
+}
+
+@mixin material-dialog-body-padding($padding: 0) {
+  ::ng-deep .wrapper > main,
+  &[headered] ::ng-deep .wrapper > main {
+    padding: $padding;
+  }
+}
+
+@mixin material-dialog-footer-padding($padding: 0) {
+  ::ng-deep .wrapper > footer {
+    padding: $padding;
+  }
+}
+
+@mixin material-dialog-footer-border-top($border) {
+  ::ng-deep .wrapper > footer {
+    border-top: $border;
+  }
+}
+
+/// Changes the margin of the footer.
+@mixin material-dialog-footer-margin($margin) {
+  ::ng-deep .wrapper > footer {
+    margin: $margin;
+  }
+}
+
+@mixin material-dialog-footer-justify-content($justify-content) {
+  ::ng-deep .wrapper > footer [footer] {
+    justify-content: $justify-content;
+  }
+}
+
+@mixin material-dialog-header() {
+  @include box-sizing(border-box);
+  padding: $mat-grid * 3 $mat-grid * 3 0;
+  width: 100%;
+
+  ::ng-deep h1,
+  ::ng-deep h3 {
+    // TODO(google): Migrate to extended mixin mat-font-title
+    font-size: $mat-font-size-title;
+    font-weight: $mat-font-weight-medium;
+    margin: 0 0 $mat-grid;
+  }
+
+  ::ng-deep p {
+    // TODO(google): Migrate to extended mixin mat-font-caption
+    font-size: $mat-font-size-caption;
+    font-weight: $mat-font-weight-regular;
+    margin: 0;
+  }
+}
+
+@mixin material-dialog-headered-header() {
+  @include material-dialog-header;
+  background: $mat-gray-700;
+  padding-bottom: $mat-grid * 2;
+
+  ::ng-deep h1,
+  ::ng-deep h3 {
+    color: $mat-white;
+    margin-bottom: math.div($mat-grid , 2);
+  }
+
+  ::ng-deep p {
+    color: $mat-transparent-white;
+  }
+}
+
+
+@mixin material-dialog-main-flex($flow: null) {
+  ::ng-deep .wrapper > main {
+    display: flex;
+    flex-flow: $flow;
+  }
+}
+
+@mixin simple-dialog-min-width($min-width) {
+  ::ng-deep .modal material-dialog.simple-dialog {
+    min-width: $min-width;
+  }
+}
+
+@mixin simple-dialog-font-size($font-size) {
+  ::ng-deep .modal material-dialog.simple-dialog {
+    .message {
+      font-size: $font-size
+    }
+  }
+}
+
+@mixin material-dialog-fullscreen(
+    $width-threshold: 100vw,
+    $height-threshold: 100vh) {
+  @media (max-height: $height-threshold), (max-width: $width-threshold) {
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    max-height: 100%;
+    max-width: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+// This mixin only exists to ensure that the current material dialog instances
+// do not break due to the default max height / width settings. This mixin
+// should not be used for new components.
+@mixin material-dialog-override-max-dimensions($max-width: 100vw, $max-height: 100vh) {
+  max-height: $max-height;
+  max-width: $max-width;
+
+  @media (max-height: 1200px) {
+    max-height: $max-height;
+  }
+
+  @media (max-height: 600px) {
+    max-height: $max-height;
+  }
+
+  @media (max-width: 1800px) {
+    max-width: $max-width;
+  }
+
+  @media (max-width: 920px) {
+    max-width: $max-width;
+  }
+}

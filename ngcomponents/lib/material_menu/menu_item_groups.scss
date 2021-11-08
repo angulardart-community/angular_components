@@ -1,0 +1,122 @@
+// Copyright (c) 2016, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+@import 'package:ngcomponents/css/material/material';
+@import 'package:ngcomponents/material_list/mixins';
+@import 'package:ngcomponents/material_menu/mixins';
+
+$menu-item-selector: '.menu-item';
+
+:host {
+  display: block;
+  outline: none;
+}
+
+.group-header {
+  @include list-item-base();
+  // TODO(google): Migrate to extended mixin mat-font-caption
+  font-size: $mat-font-size-caption;
+  font-weight: $mat-font-weight-regular;
+
+  color: $mat-light-transparent-black;
+  height: $mat-grid * 3;
+  line-height: $mat-grid * 3;
+
+  // To layout label and expansion button.
+  display: flex;
+  justify-content: space-between;
+
+  &.is-collapsible {
+    cursor: pointer;
+  }
+}
+
+.expansion-icon {
+  align-items: center;
+  cursor: pointer;
+  margin-left: $mat-grid;
+}
+
+#{$menu-item-selector} {
+  @include list-item-button();
+
+  min-height: $list-item-height;
+  outline: none;
+
+  material-icon.disabled {
+    color: $mat-lighter-transparent-black;
+  }
+}
+
+:host-context([dir="rtl"]) {
+  .group-header, #{$menu-item-selector} {
+    @include list-item-base-rtl;
+  }
+}
+
+#{$menu-item-selector}.active {
+  @include menu-item-affix-hover;
+}
+
+:host(.mouse-driven) {
+  #{$menu-item-selector}:not(:hover):not(:focus) {
+    background-color: inherit;
+  }
+
+  // When the menu is mouse-drive there is a delay until the .active class is
+  // assigned to the hovered item. To make the UI more snappy we also change
+  // the visibility of the icon instantly on hover.
+  #{$menu-item-selector}:hover {
+    @include menu-item-affix-hover;
+  }
+}
+
+:host(.keyboard-driven) {
+  #{$menu-item-selector} {
+    &:not(.active) {
+      background-color: inherit;
+    }
+
+    &.is-menu-parent {
+      background: $mat-grey-200;
+    }
+  }
+}
+
+// Group separator
+.group {
+  &:not(.empty):not(:first-child) {
+    border-top: 1px solid $mat-grey-300;
+    margin-top: $mat-grid - 1px;
+    padding-top: $mat-grid;
+  }
+}
+
+.menu-item-label-section {
+  display: inline-flex;
+  flex: 1;
+  flex-direction: column;
+  line-height: normal;
+  padding: $mat-grid-type 0;
+}
+
+.menu-item-secondary-label {
+  @include mat-font-caption;
+}
+
+.label-annotation {
+  color: $mat-green;
+  font-size: $mat-font-size-caption - 2;
+  font-weight: $mat-font-weight-bold;
+  line-height: $mat-font-size-caption - 2;
+  text-transform: uppercase;
+}
+
+.item-group-list {
+  padding: $mat-grid 0;
+}
+
+.suffix-list {
+  margin-left: $mat-grid * 3;
+}

@@ -10,7 +10,7 @@ targets:
             "lib/src/**",
             "lib/visitors/**",
             ]
-      angular_components|scss_builder:
+      ngcomponents|scss_builder:
         enabled: True
       angular_gallery|angular_gallery:
         enabled: False
@@ -28,4 +28,4 @@ builders:
       ".dart": [".gallery_info.json", ".api.dart"],
       "$lib$": ["gallery_section.dart", "gallery_section_summary.json"]}
     auto_apply: dependents
-    runs_before: ["angular|angular", "angular_components|scss_builder"]
+    runs_before: ["angular|angular", "ngcomponents|scss_builder"]

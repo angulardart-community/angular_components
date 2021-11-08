@@ -3,12 +3,12 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_button/material_button.dart';
-import 'package:angular_components/material_button/material_fab.dart';
+import 'package:ngcomponents/material_button/material_button.dart';
+import 'package:ngcomponents/material_button/material_fab.dart';
 import 'buttons.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
+import 'package:ngcomponents/material_icon/material_icon.dart';
 import 'package:angular_gallery_section/annotation/gallery_section_config.dart';
-import 'package:angular_components/theme/dark_theme.dart';
+import 'package:ngcomponents/theme/dark_theme.dart';
 
 @GallerySectionConfig(
   displayName: 'Material Button',

@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_input/material_input.dart';
+import 'package:ngcomponents/material_input/material_input.dart';
 
 @Component(
   selector: 'material-input-mixins',

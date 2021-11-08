@@ -3,14 +3,14 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/focus/focus_item.dart';
-import 'package:angular_components/focus/focus_list.dart';
-import 'package:angular_components/material_select/display_name.dart';
-import 'package:angular_components/material_select/material_select.dart';
-import 'package:angular_components/material_select/material_select_item.dart';
-import 'package:angular_components/model/selection/selection_model.dart';
-import 'package:angular_components/model/selection/selection_options.dart';
-import 'package:angular_components/model/ui/display_name.dart';
+import 'package:ngcomponents/focus/focus_item.dart';
+import 'package:ngcomponents/focus/focus_list.dart';
+import 'package:ngcomponents/material_select/display_name.dart';
+import 'package:ngcomponents/material_select/material_select.dart';
+import 'package:ngcomponents/material_select/material_select_item.dart';
+import 'package:ngcomponents/model/selection/selection_model.dart';
+import 'package:ngcomponents/model/selection/selection_options.dart';
+import 'package:ngcomponents/model/ui/display_name.dart';
 
 @Component(
   selector: 'material-select-demo',

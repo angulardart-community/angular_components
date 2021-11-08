@@ -2,8 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-@import 'package:angular_components/css/material/material';
-@import 'package:angular_components/material_yes_no_buttons/mixins';
+@import 'package:ngcomponents/css/material/material';
+@import 'package:ngcomponents/material_yes_no_buttons/mixins';
 
 .red-yes {
   @include material-yes-button-color($mat-red-500);

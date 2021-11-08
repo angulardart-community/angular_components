@@ -1,0 +1,144 @@
+// Copyright (c) 2016, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+@import 'package:ngcomponents/material_list/mixins';
+
+/// Sets width of persitent and permanent material drawers.
+///
+/// Must be applied to the component itself, e.g.:
+///
+/// ```scss
+/// material-drawer {
+///   @include mat-drawer-width(512px);
+/// }
+/// ```
+@mixin mat-drawer-width($width) {
+  &[persistent],
+  &[permanent] {
+    width: $width;
+
+    &:not([end]) {
+      ~ material-content,
+      ~ .material-content {
+        margin-left: $width;
+      }
+    }
+
+    &[end] {
+      ~ material-content,
+      ~ .material-content {
+        margin-right: $width;
+      }
+    }
+  }
+
+  &[persistent].mat-drawer-collapsed {
+    &:not([end]) {
+      transform: translateX(-100%);
+
+      // If the drawer is collapsed, which needs to be an element before the
+      // content, set the content to the left edge.
+      ~ material-content,
+      ~ .material-content {
+        margin-left: 0;
+      }
+    }
+
+    &[end] {
+      transform: translateX(100%);
+
+      // [end] drawer is positioned on the opposite side
+      ~ material-content,
+      ~ .material-content {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+/// Internal function to generate selector for drawer-content.
+///
+/// Required to allow the temporary and stackable drawers to use the width mixin
+/// rather than duplicating the styles, which would get out of date.
+///
+/// *   $host encapsulates the styles within :host.
+/// *   $hostSelector appends a selector to the host material-drawer.
+/// *   $drawerSelector appends a selector to .drawer-content.
+@function _drawer-content(
+    $host: false, $hostSelector: '', $drawerSelector: '') {
+  $parent: if($host,
+      if($hostSelector == '', ':host', ':host(#{$hostSelector})'),
+      '&#{$hostSelector}');
+  @return '#{$parent} ::ng-deep > .drawer-content#{$drawerSelector}';
+}
+
+/// Sets width of MaterialTemporaryDrawerComponent and
+/// MaterialStackableDrawerComponent
+///
+/// Should be applied to the component itself, e.g.:
+///
+/// ```scss
+/// material-drawer[temporary] {
+///   @include mat-temporary-drawer-width(512px);
+/// }
+/// ```
+///
+/// _selector is for internal use only.
+@mixin mat-temporary-drawer-width($width, $_selector...) {
+  #{_drawer-content($_selector...)} {
+    left: -$width;
+    width: $width;
+  }
+
+  #{_drawer-content($hostSelector: '.mat-drawer-expanded', $_selector...)} {
+    transform: translateX(100%);
+  }
+
+  // We can't change the transform when the component is right aligned
+  // since that'll cause it to animate from the left to the right (and back)
+  // so we keep same transform for both alignments and rely on
+  // the left and right attributes to position the content properly.
+  #{_drawer-content($hostSelector: '[end]', $_selector...)} {
+    left: initial;
+    right: -$width;
+  }
+
+  #{_drawer-content(
+      $hostSelector: '[end].mat-drawer-expanded', $_selector...)} {
+    transform: translateX(-100%);
+  }
+}
+
+/// Adds the mixins that apply the correct styles for material-list items inside
+/// of material-drawer.
+@mixin mat-drawer-list-items() {
+  material-list {
+    // Remove the padding on the default list component when it is used in the
+    // drawer.
+    padding: 0;
+
+    // Use the label attribute from material-list but ensure the style is right
+    // for the drawer.
+    [label] {
+      @include list-item-base;
+      align-items: center;
+      // TODO(google) Remove once material-list uses the right color value.
+      color: $mat-light-transparent-black;
+      display: flex;
+    }
+
+    material-list-item,
+    [label] {
+      font-weight: $mat-font-weight-medium;
+      // The default size/padding for list item is incorrect for the drawer spec.
+      height: $mat-grid * 6;
+      padding: 0 $mat-grid * 2;
+
+      material-icon {
+        color: $mat-light-transparent-black;
+        margin-right: $mat-grid * 4;
+      }
+    }
+  }
+}

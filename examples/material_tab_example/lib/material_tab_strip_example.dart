@@ -3,12 +3,12 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/annotations/rtl_annotation.dart';
-import 'package:angular_components/material_tab/fixed_material_tab_strip.dart';
-import 'package:angular_components/material_tab/tab_change_event.dart';
-import 'package:angular_components/material_toggle/material_toggle.dart';
-import 'package:angular_components/utils/browser/dom_service/angular_2.dart';
-import 'package:angular_components/utils/browser/window/module.dart';
+import 'package:ngcomponents/annotations/rtl_annotation.dart';
+import 'package:ngcomponents/material_tab/fixed_material_tab_strip.dart';
+import 'package:ngcomponents/material_tab/tab_change_event.dart';
+import 'package:ngcomponents/material_toggle/material_toggle.dart';
+import 'package:ngcomponents/utils/browser/dom_service/angular_2.dart';
+import 'package:ngcomponents/utils/browser/window/module.dart';
 
 @Component(
   selector: 'material-tab-strip-example',

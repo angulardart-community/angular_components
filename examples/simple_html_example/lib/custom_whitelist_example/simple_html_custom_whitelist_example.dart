@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart' show Component, FactoryProvider;
-import 'package:angular_components/simple_html/simple_html.dart'
+import 'package:ngcomponents/simple_html/simple_html.dart'
     show SimpleHtmlComponent, simpleHtmlUriWhitelist;
 
 import 'simple_html_custom_whitelist_example_messages.dart';

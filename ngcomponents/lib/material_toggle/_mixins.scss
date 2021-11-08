@@ -1,0 +1,55 @@
+// Copyright (c) 2016, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+@import 'package:ngcomponents/css/material/material';
+
+/// Changes the `$off-btn-color` and `$primary-color` of <material-toggle>s.
+///
+/// Optionally specify a `$selector`. Example use:
+///     @include material-toggle-theme(
+///         $primary-color: $mat-teal-500,
+///         $off-btn-color: $mat-teal-500,
+///         $selector: '.custom-area');
+// TODO(google): Remove selector it shouldn't be needed as there aren't host styling.
+
+@mixin material-toggle-theme($primary-color, $off-btn-color: null, $selector: '') {
+  @if $off-btn-color != null {
+    ::ng-deep #{$selector} material-toggle.themeable .material-toggle .tgl-btn {
+      background-color: $off-btn-color;
+    }
+  }
+
+  ::ng-deep #{$selector} material-toggle.themeable .material-toggle.checked:not(.disabled) .tgl-bar {
+    background-color: $primary-color;
+  }
+
+  ::ng-deep #{$selector} material-toggle.themeable .material-toggle.checked:not(.disabled) .tgl-btn {
+    background-color: $primary-color;
+  }
+
+  ::ng-deep #{$selector} material-toggle.themeable .tgl-btn-underlay.under-focus {
+    @if $off-btn-color != null {
+      background-color: rgba($off-btn-color, $mat-ripple-focused-opacity);
+
+    } else {
+      background-color: rgba(#bcbcbc, $mat-ripple-focused-opacity);
+    }
+  }
+
+  ::ng-deep #{$selector} material-toggle.themeable .tgl-btn-underlay.under-focus.under-checked {
+    background-color: rgba($primary-color, $mat-ripple-focused-opacity);
+  }
+}
+
+/// Displays the toggle label to the right of the toggle.
+// $modifier here to match mixin interface.
+@mixin flip-toggle-label-position($modifier: "") {
+  ::ng-deep .material-toggle {
+    flex-direction: row-reverse;
+  }
+
+  ::ng-deep .material-toggle .tgl-lbl {
+    padding-left: $mat-grid;
+  }
+}

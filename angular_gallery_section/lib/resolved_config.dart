@@ -4,7 +4,7 @@
 
 import 'package:angular_gallery_section/components/gallery_component/documentation_info.dart';
 import 'package:angular_gallery_section/visitors/path_utils.dart' as path_utils;
-import 'package:angular_components/utils/strings/string_utils.dart' as string;
+import 'package:ngcomponents/utils/strings/string_utils.dart' as string;
 
 final _invalidCharacters = RegExp(r'[^a-zA-Z0-9 ]');
 

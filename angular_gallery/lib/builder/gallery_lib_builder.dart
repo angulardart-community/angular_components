@@ -6,7 +6,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:build/build.dart';
-import 'package:angular_components/utils/strings/string_utils.dart' as strings;
+import 'package:ngcomponents/utils/strings/string_utils.dart' as strings;
 
 import '../src/template_util.dart';
 

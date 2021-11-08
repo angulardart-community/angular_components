@@ -3,9 +3,9 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_datepicker/date_range_input.dart';
-import 'package:angular_components/material_datepicker/module.dart';
-import 'package:angular_components/model/date/date.dart';
+import 'package:ngcomponents/material_datepicker/date_range_input.dart';
+import 'package:ngcomponents/material_datepicker/module.dart';
+import 'package:ngcomponents/model/date/date.dart';
 
 @Component(
   selector: 'date-range-input-demo',
