@@ -68,28 +68,28 @@ for PKG in ${PKGS}; do
       echo -e "\033[1mPKG: ${PKG}; TASK: ${TASK}\033[22m"
       case ${TASK} in
       analyze_0)
-        echo 'dart analyze .'
-        dart analyze . || EXIT_CODE=$?
-        ;;
-      analyze_1)
         echo 'dart analyze --fatal-infos .'
         dart analyze --fatal-infos . || EXIT_CODE=$?
         ;;
+      analyze_1)
+        echo 'dart analyze .'
+        dart analyze . || EXIT_CODE=$?
+        ;;
       command_0)
-        echo './tool/travis/install_protoc.sh'
-        ./tool/travis/install_protoc.sh || EXIT_CODE=$?
-        ;;
-      command_1)
-        echo 'dart run build_runner test -- -p chrome'
-        dart run build_runner test -- -p chrome || EXIT_CODE=$?
-        ;;
-      command_2)
         echo 'dart pub run build_runner build web'
         dart pub run build_runner build web || EXIT_CODE=$?
         ;;
-      command_3)
+      command_1)
         echo 'dart pub run build_runner build web --release'
         dart pub run build_runner build web --release || EXIT_CODE=$?
+        ;;
+      command_2)
+        echo './tool/travis/install_protoc.sh'
+        ./tool/travis/install_protoc.sh || EXIT_CODE=$?
+        ;;
+      command_3)
+        echo 'dart run build_runner test -- -p chrome'
+        dart run build_runner test -- -p chrome || EXIT_CODE=$?
         ;;
       format)
         echo 'dart format --output=none --set-exit-if-changed .'

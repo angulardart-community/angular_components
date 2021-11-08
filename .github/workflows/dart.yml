@@ -37,16 +37,16 @@ jobs:
       - name: mono_repo self validate
         run: dart pub global run mono_repo generate --validate
   job_002:
-    name: "analyze_and_format_core; Dart 2.14.2; PKGS: angular_components, angular_gallery, angular_gallery_section; `dart analyze .`"
+    name: "analyze_and_format_core; Dart 2.14.2; PKGS: angular_gallery, angular_gallery_section, ngcomponents; `dart analyze .`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:angular_components-angular_gallery-angular_gallery_section;commands:analyze_0"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:angular_gallery-angular_gallery_section-ngcomponents;commands:analyze_1"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:angular_components-angular_gallery-angular_gallery_section
+            os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:angular_gallery-angular_gallery_section-ngcomponents
             os:ubuntu-latest;pub-cache-hosted;dart:2.14.2
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
@@ -55,15 +55,6 @@ jobs:
           sdk: "2.14.2"
       - id: checkout
         uses: actions/checkout@v2.3.5
-      - id: angular_components_pub_upgrade
-        name: angular_components; dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: angular_components
-        run: dart pub upgrade
-      - name: angular_components; dart analyze .
-        if: "always() && steps.angular_components_pub_upgrade.conclusion == 'success'"
-        working-directory: angular_components
-        run: dart analyze .
       - id: angular_gallery_pub_upgrade
         name: angular_gallery; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
@@ -82,45 +73,19 @@ jobs:
         if: "always() && steps.angular_gallery_section_pub_upgrade.conclusion == 'success'"
         working-directory: angular_gallery_section
         run: dart analyze .
-    if:
-    needs:
-      - job_001
-  job_003:
-    name: "analyze_and_format_core; Dart dev; PKG: angular_components; `dart format --output=none --set-exit-if-changed .`, `dart analyze .`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@v2.1.6
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:angular_components;commands:format-analyze_0"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:angular_components
-            os:ubuntu-latest;pub-cache-hosted;dart:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - uses: dart-lang/setup-dart@v1.3
-        with:
-          sdk: dev
-      - id: checkout
-        uses: actions/checkout@v2.3.5
-      - id: angular_components_pub_upgrade
-        name: angular_components; dart pub upgrade
+      - id: ngcomponents_pub_upgrade
+        name: ngcomponents; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: angular_components
+        working-directory: ngcomponents
         run: dart pub upgrade
-      - name: "angular_components; dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.angular_components_pub_upgrade.conclusion == 'success'"
-        working-directory: angular_components
-        run: "dart format --output=none --set-exit-if-changed ."
-      - name: angular_components; dart analyze .
-        if: "always() && steps.angular_components_pub_upgrade.conclusion == 'success'"
-        working-directory: angular_components
+      - name: ngcomponents; dart analyze .
+        if: "always() && steps.ngcomponents_pub_upgrade.conclusion == 'success'"
+        working-directory: ngcomponents
         run: dart analyze .
     if:
     needs:
       - job_001
-  job_004:
+  job_003:
     name: "analyze_and_format_core; Dart dev; PKGS: angular_gallery, angular_gallery_section; `dart format --output=none --set-exit-if-changed .`, `dart analyze --fatal-infos .`"
     runs-on: ubuntu-latest
     steps:
@@ -128,7 +93,7 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:angular_gallery-angular_gallery_section;commands:format-analyze_1"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:angular_gallery-angular_gallery_section;commands:format-analyze_0"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:angular_gallery-angular_gallery_section
             os:ubuntu-latest;pub-cache-hosted;dart:dev
@@ -168,6 +133,41 @@ jobs:
     if:
     needs:
       - job_001
+  job_004:
+    name: "analyze_and_format_core; Dart dev; PKG: ngcomponents; `dart format --output=none --set-exit-if-changed .`, `dart analyze .`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@v2.1.6
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:ngcomponents;commands:format-analyze_1"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:ngcomponents
+            os:ubuntu-latest;pub-cache-hosted;dart:dev
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: dev
+      - id: checkout
+        uses: actions/checkout@v2.3.5
+      - id: ngcomponents_pub_upgrade
+        name: ngcomponents; dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: ngcomponents
+        run: dart pub upgrade
+      - name: "ngcomponents; dart format --output=none --set-exit-if-changed ."
+        if: "always() && steps.ngcomponents_pub_upgrade.conclusion == 'success'"
+        working-directory: ngcomponents
+        run: "dart format --output=none --set-exit-if-changed ."
+      - name: ngcomponents; dart analyze .
+        if: "always() && steps.ngcomponents_pub_upgrade.conclusion == 'success'"
+        working-directory: ngcomponents
+        run: dart analyze .
+    if:
+    needs:
+      - job_001
   job_005:
     name: "analyze_and_format_examples_1; Dart 2.14.2; PKGS: examples/app_layout_example, examples/material_button_example, examples/material_card_example, examples/material_checkbox_example, examples/material_chips_example, examples/material_datepicker_example, examples/material_dialog_example, examples/material_expansionpanel_example, examples/material_icon_example, examples/material_list_example, examples/material_menu_example, examples/material_yes_no_buttons_example; `dart analyze .`"
     runs-on: ubuntu-latest
@@ -176,7 +176,7 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:examples/app_layout_example-examples/material_button_example-examples/material_card_example-examples/material_checkbox_example-examples/material_chips_example-examples/material_datepicker_example-examples/material_dialog_example-examples/material_expansionpanel_example-examples/material_icon_example-examples/material_list_example-examples/material_menu_example-examples/material_yes_no_buttons_example;commands:analyze_0"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:examples/app_layout_example-examples/material_button_example-examples/material_card_example-examples/material_checkbox_example-examples/material_chips_example-examples/material_datepicker_example-examples/material_dialog_example-examples/material_expansionpanel_example-examples/material_icon_example-examples/material_list_example-examples/material_menu_example-examples/material_yes_no_buttons_example;commands:analyze_1"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:examples/app_layout_example-examples/material_button_example-examples/material_card_example-examples/material_checkbox_example-examples/material_chips_example-examples/material_datepicker_example-examples/material_dialog_example-examples/material_expansionpanel_example-examples/material_icon_example-examples/material_list_example-examples/material_menu_example-examples/material_yes_no_buttons_example
             os:ubuntu-latest;pub-cache-hosted;dart:2.14.2
@@ -309,7 +309,7 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/app_layout_example-examples/material_button_example-examples/material_card_example-examples/material_checkbox_example-examples/material_chips_example-examples/material_datepicker_example-examples/material_dialog_example-examples/material_expansionpanel_example-examples/material_icon_example-examples/material_list_example-examples/material_yes_no_buttons_example;commands:format-analyze_1"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/app_layout_example-examples/material_button_example-examples/material_card_example-examples/material_checkbox_example-examples/material_chips_example-examples/material_datepicker_example-examples/material_dialog_example-examples/material_expansionpanel_example-examples/material_icon_example-examples/material_list_example-examples/material_yes_no_buttons_example;commands:format-analyze_0"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/app_layout_example-examples/material_button_example-examples/material_card_example-examples/material_checkbox_example-examples/material_chips_example-examples/material_datepicker_example-examples/material_dialog_example-examples/material_expansionpanel_example-examples/material_icon_example-examples/material_list_example-examples/material_yes_no_buttons_example
             os:ubuntu-latest;pub-cache-hosted;dart:dev
@@ -511,7 +511,7 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/material_menu_example;commands:format-analyze_0"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/material_menu_example;commands:format-analyze_1"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/material_menu_example
             os:ubuntu-latest;pub-cache-hosted;dart:dev
@@ -549,7 +549,7 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:examples/material_popup_example-examples/material_progress_example-examples/material_radio_example-examples/material_slider_example-examples/material_spinner_example-examples/material_stepper_example-examples/material_tab_example-examples/material_toggle_example-examples/material_tooltip_example-examples/scorecard_example-examples/simple_html_example;commands:analyze_0"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:examples/material_popup_example-examples/material_progress_example-examples/material_radio_example-examples/material_slider_example-examples/material_spinner_example-examples/material_stepper_example-examples/material_tab_example-examples/material_toggle_example-examples/material_tooltip_example-examples/scorecard_example-examples/simple_html_example;commands:analyze_1"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:examples/material_popup_example-examples/material_progress_example-examples/material_radio_example-examples/material_slider_example-examples/material_spinner_example-examples/material_stepper_example-examples/material_tab_example-examples/material_toggle_example-examples/material_tooltip_example-examples/scorecard_example-examples/simple_html_example
             os:ubuntu-latest;pub-cache-hosted;dart:2.14.2
@@ -677,7 +677,7 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/material_popup_example-examples/material_progress_example-examples/material_radio_example-examples/material_slider_example-examples/material_spinner_example-examples/material_stepper_example-examples/material_tab_example-examples/material_toggle_example-examples/material_tooltip_example-examples/scorecard_example-examples/simple_html_example;commands:format-analyze_1"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/material_popup_example-examples/material_progress_example-examples/material_radio_example-examples/material_slider_example-examples/material_spinner_example-examples/material_stepper_example-examples/material_tab_example-examples/material_toggle_example-examples/material_tooltip_example-examples/scorecard_example-examples/simple_html_example;commands:format-analyze_0"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/material_popup_example-examples/material_progress_example-examples/material_radio_example-examples/material_slider_example-examples/material_spinner_example-examples/material_stepper_example-examples/material_tab_example-examples/material_toggle_example-examples/material_tooltip_example-examples/scorecard_example-examples/simple_html_example
             os:ubuntu-latest;pub-cache-hosted;dart:dev
@@ -889,16 +889,16 @@ jobs:
       - job_007
       - job_008
   job_012:
-    name: "unit_test; Dart 2.14.2; PKG: angular_components; `./tool/travis/install_protoc.sh`, `dart test --run-skipped`"
+    name: "unit_test; Dart 2.14.2; PKG: ngcomponents; `./tool/travis/install_protoc.sh`, `dart test --run-skipped`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:angular_components;commands:command_0-test"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:ngcomponents;commands:command_2-test"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:angular_components
+            os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:ngcomponents
             os:ubuntu-latest;pub-cache-hosted;dart:2.14.2
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
@@ -907,18 +907,18 @@ jobs:
           sdk: "2.14.2"
       - id: checkout
         uses: actions/checkout@v2.3.5
-      - id: angular_components_pub_upgrade
-        name: angular_components; dart pub upgrade
+      - id: ngcomponents_pub_upgrade
+        name: ngcomponents; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: angular_components
+        working-directory: ngcomponents
         run: dart pub upgrade
-      - name: angular_components; ./tool/travis/install_protoc.sh
-        if: "always() && steps.angular_components_pub_upgrade.conclusion == 'success'"
-        working-directory: angular_components
+      - name: ngcomponents; ./tool/travis/install_protoc.sh
+        if: "always() && steps.ngcomponents_pub_upgrade.conclusion == 'success'"
+        working-directory: ngcomponents
         run: ./tool/travis/install_protoc.sh
-      - name: "angular_components; dart test --run-skipped"
-        if: "always() && steps.angular_components_pub_upgrade.conclusion == 'success'"
-        working-directory: angular_components
+      - name: "ngcomponents; dart test --run-skipped"
+        if: "always() && steps.ngcomponents_pub_upgrade.conclusion == 'success'"
+        working-directory: ngcomponents
         run: dart test --run-skipped
     if:
     needs:
@@ -934,16 +934,16 @@ jobs:
       - job_010
       - job_011
   job_013:
-    name: "unit_test; Dart 2.14.2; PKG: angular_components; `dart run build_runner test -- -p chrome`"
+    name: "unit_test; Dart 2.14.2; PKG: ngcomponents; `dart run build_runner test -- -p chrome`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:angular_components;commands:command_1"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:ngcomponents;commands:command_3"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:angular_components
+            os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:ngcomponents
             os:ubuntu-latest;pub-cache-hosted;dart:2.14.2
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
@@ -952,14 +952,14 @@ jobs:
           sdk: "2.14.2"
       - id: checkout
         uses: actions/checkout@v2.3.5
-      - id: angular_components_pub_upgrade
-        name: angular_components; dart pub upgrade
+      - id: ngcomponents_pub_upgrade
+        name: ngcomponents; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: angular_components
+        working-directory: ngcomponents
         run: dart pub upgrade
-      - name: "angular_components; dart run build_runner test -- -p chrome"
-        if: "always() && steps.angular_components_pub_upgrade.conclusion == 'success'"
-        working-directory: angular_components
+      - name: "ngcomponents; dart run build_runner test -- -p chrome"
+        if: "always() && steps.ngcomponents_pub_upgrade.conclusion == 'success'"
+        working-directory: ngcomponents
         run: dart run build_runner test -- -p chrome
     if:
     needs:
@@ -975,16 +975,16 @@ jobs:
       - job_010
       - job_011
   job_014:
-    name: "unit_test; Dart dev; PKG: angular_components; `./tool/travis/install_protoc.sh`, `dart test --run-skipped`"
+    name: "unit_test; Dart dev; PKG: ngcomponents; `./tool/travis/install_protoc.sh`, `dart test --run-skipped`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:angular_components;commands:command_0-test"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:ngcomponents;commands:command_2-test"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:angular_components
+            os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:ngcomponents
             os:ubuntu-latest;pub-cache-hosted;dart:dev
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
@@ -993,18 +993,18 @@ jobs:
           sdk: dev
       - id: checkout
         uses: actions/checkout@v2.3.5
-      - id: angular_components_pub_upgrade
-        name: angular_components; dart pub upgrade
+      - id: ngcomponents_pub_upgrade
+        name: ngcomponents; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: angular_components
+        working-directory: ngcomponents
         run: dart pub upgrade
-      - name: angular_components; ./tool/travis/install_protoc.sh
-        if: "always() && steps.angular_components_pub_upgrade.conclusion == 'success'"
-        working-directory: angular_components
+      - name: ngcomponents; ./tool/travis/install_protoc.sh
+        if: "always() && steps.ngcomponents_pub_upgrade.conclusion == 'success'"
+        working-directory: ngcomponents
         run: ./tool/travis/install_protoc.sh
-      - name: "angular_components; dart test --run-skipped"
-        if: "always() && steps.angular_components_pub_upgrade.conclusion == 'success'"
-        working-directory: angular_components
+      - name: "ngcomponents; dart test --run-skipped"
+        if: "always() && steps.ngcomponents_pub_upgrade.conclusion == 'success'"
+        working-directory: ngcomponents
         run: dart test --run-skipped
     if:
     needs:
@@ -1020,16 +1020,16 @@ jobs:
       - job_010
       - job_011
   job_015:
-    name: "unit_test; Dart dev; PKG: angular_components; `dart run build_runner test -- -p chrome`"
+    name: "unit_test; Dart dev; PKG: ngcomponents; `dart run build_runner test -- -p chrome`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:angular_components;commands:command_1"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:ngcomponents;commands:command_3"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:angular_components
+            os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:ngcomponents
             os:ubuntu-latest;pub-cache-hosted;dart:dev
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
@@ -1038,14 +1038,14 @@ jobs:
           sdk: dev
       - id: checkout
         uses: actions/checkout@v2.3.5
-      - id: angular_components_pub_upgrade
-        name: angular_components; dart pub upgrade
+      - id: ngcomponents_pub_upgrade
+        name: ngcomponents; dart pub upgrade
         if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: angular_components
+        working-directory: ngcomponents
         run: dart pub upgrade
-      - name: "angular_components; dart run build_runner test -- -p chrome"
-        if: "always() && steps.angular_components_pub_upgrade.conclusion == 'success'"
-        working-directory: angular_components
+      - name: "ngcomponents; dart run build_runner test -- -p chrome"
+        if: "always() && steps.ngcomponents_pub_upgrade.conclusion == 'success'"
+        working-directory: ngcomponents
         run: dart run build_runner test -- -p chrome
     if:
     needs:
@@ -1068,7 +1068,7 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:examples/angular_components_example;commands:command_2-command_3"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:examples/angular_components_example;commands:command_0-command_1"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;dart:2.14.2;packages:examples/angular_components_example
             os:ubuntu-latest;pub-cache-hosted;dart:2.14.2
@@ -1117,7 +1117,7 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/angular_components_example;commands:command_2-command_3"
+          key: "os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/angular_components_example;commands:command_0-command_1"
           restore-keys: |
             os:ubuntu-latest;pub-cache-hosted;dart:dev;packages:examples/angular_components_example
             os:ubuntu-latest;pub-cache-hosted;dart:dev
