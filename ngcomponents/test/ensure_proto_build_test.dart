@@ -16,8 +16,8 @@ void main() {
   test('ensure proto gen succeeds with no changes', () {
     var pkgRoot = _runProc('git', ['rev-parse', '--show-toplevel']);
     var currentDir = Directory.current.resolveSymbolicLinksSync();
-    if (!p.equals(p.join(pkgRoot, 'angular_components'), currentDir)) {
-      throw StateError('Expected the git root ($pkgRoot/angular_components) '
+    if (!p.equals(p.join(pkgRoot, 'ngcomponents'), currentDir)) {
+      throw StateError('Expected the git root ($pkgRoot/ngcomponents) '
           'to match the current directory ($currentDir).');
     }
 
