@@ -7,8 +7,7 @@ export 'package:ngcomponents/src/laminate/popup/dom_popup_source.dart';
 export 'package:ngcomponents/src/laminate/popup/popup_hierarchy.dart';
 export 'package:ngcomponents/src/laminate/popup/popup_interface.dart';
 export 'package:ngcomponents/src/laminate/popup/popup_position_mixin.dart';
-export 'package:ngcomponents/src/laminate/popup/popup_ref.dart'
-    show PopupRef;
+export 'package:ngcomponents/src/laminate/popup/popup_ref.dart' show PopupRef;
 export 'package:ngcomponents/src/laminate/popup/popup_size_provider.dart';
 export 'package:ngcomponents/src/laminate/popup/popup_size_provider_directive.dart';
 export 'package:ngcomponents/src/laminate/popup/popup_source.dart';

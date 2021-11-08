@@ -9,8 +9,7 @@ import 'package:angular/angular.dart';
 import 'package:ngcomponents/utils/browser/events/events.dart';
 import 'package:ngcomponents/utils/browser/feature_detector/feature_detector.dart'
     show supportsAnimationApi;
-import 'package:ngcomponents/utils/color/material.dart'
-    show rippleOpacity;
+import 'package:ngcomponents/utils/color/material.dart' show rippleOpacity;
 
 // The ripple size is 256x256 for optimal performance (power-of-two texture)
 // while maintaining smooth ripple edges (since the texture is being scaled on
