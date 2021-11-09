@@ -43,9 +43,9 @@ Future<void> analyze() async {
 
 @Task('Build protocol buffers')
 Future<void> buildProtoc() async {
-	// Probably not needed as Grinder does something similar
-	// by verifying the location of the `pubspec.yaml` file.
-	// Just keeping it here, since one more test is better than none.
+  // Probably not needed as Grinder does something similar
+  // by verifying the location of the `pubspec.yaml` file.
+  // Just keeping it here, since one more test is better than none.
   // var pkgRoot = await _runProc('git', ['rev-parse', '--show-toplevel']);
   // var currentDir = Directory.current.resolveSymbolicLinksSync();
   // if (!p.equals(p.join(pkgRoot, 'angular_components'), currentDir)) {
@@ -80,7 +80,7 @@ Future<void> buildProtoc() async {
     '--dart_out=$datepickerProtoPath',
     '$datepickerProtoPath/date_range.proto'
   ]);
-  _runProc('dartfmt', ['-w', datepickerProtoPath]);
+  _runProc('dart', ['format', datepickerProtoPath]);
 
   // 3 - get a list of modified `.pb.dart` files, for info only
   _runProc('git', ['diff', '$datepickerProtoPath/date.pb.dart']);
@@ -98,9 +98,10 @@ final _whitespace = RegExp(r'\s');
 // }
 
 Future<void> _runProc(String proc, List<String> args) async {
-  var result = await Process.start(proc, args, mode: ProcessStartMode.inheritStdio);
+  var result =
+      await Process.start(proc, args, mode: ProcessStartMode.inheritStdio);
 
   if (await result.exitCode != 0) {
-		throw Exception('"$proc ${args.join(' ')}" failed!');
+    throw Exception('"$proc ${args.join(' ')}" failed!');
   }
 }

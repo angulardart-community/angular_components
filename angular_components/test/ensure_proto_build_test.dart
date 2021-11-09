@@ -45,7 +45,7 @@ void main() {
       '--dart_out=$datepickerProtoPath',
       '$datepickerProtoPath/date_range.proto'
     ]);
-    _runProc('dartfmt', ['-w', datepickerProtoPath]);
+    _runProc('dart', ['format', datepickerProtoPath]);
     // 3 - get a list of modified `.pb.dart` files - should still be empty
 
     printOnFailure(
