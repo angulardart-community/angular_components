@@ -42,13 +42,16 @@ Future<void> analyze() async {
 }
 
 @Task('Build protocol buffers')
-void build_protoc() {
-  var pkgRoot = _runProc('git', ['rev-parse', '--show-toplevel']);
-  var currentDir = Directory.current.resolveSymbolicLinksSync();
-  if (!p.equals(p.join(pkgRoot, 'angular_components'), currentDir)) {
-    throw StateError('Expected the git root ($pkgRoot/angular_components) '
-        'to match the current directory ($currentDir).');
-  }
+Future<void> buildProtoc() async {
+	// Probably not needed as Grinder does something similar
+	// by verifying the location of the `pubspec.yaml` file.
+	// Just keeping it here, since one more test is better than none.
+  // var pkgRoot = await _runProc('git', ['rev-parse', '--show-toplevel']);
+  // var currentDir = Directory.current.resolveSymbolicLinksSync();
+  // if (!p.equals(p.join(pkgRoot, 'angular_components'), currentDir)) {
+  //   throw StateError('Expected the git root ($pkgRoot/angular_components) '
+  //       'to match the current directory ($currentDir).');
+  // }
 
   // By default try to run from a pre-determined location for Travis.
   var protocPath = '${Platform.environment['HOME']}/protoc/bin/protoc';
@@ -59,12 +62,12 @@ void build_protoc() {
     protocPath = (result.stdout as String).trim();
   }
 
-  final datepickerProtoPath = '${currentDir}/lib/material_datepicker/proto';
+  final datepickerProtoPath = 'lib/material_datepicker/proto';
 
   // 1 - get a list of modified `.pb.dart` files - should be empty
-  if (_changedGeneratedFiles().isNotEmpty) {
-    print('INFO: .pb.dart files are already modified???');
-  }
+  // if (_changedGeneratedFiles().isNotEmpty) {
+  //   print('INFO: .pb.dart files are already modified.');
+  // }
 
   // 2 - run build
   _runProc(protocPath, [
@@ -86,20 +89,18 @@ void build_protoc() {
 
 final _whitespace = RegExp(r'\s');
 
-Set<String> _changedGeneratedFiles() {
-  var output = _runProc('git', ['status', '--porcelain']);
-  return LineSplitter.split(output)
-      .map((line) => line.split(_whitespace).last)
-      .where((path) => path.endsWith('.pb.dart'))
-      .toSet();
-}
+// Set<String> _changedGeneratedFiles() {
+//   var output = _runProc('git', ['status', '--porcelain']);
+//   return LineSplitter.split(output)
+//       .map((line) => line.split(_whitespace).last)
+//       .where((path) => path.endsWith('.pb.dart'))
+//       .toSet();
+// }
 
-String _runProc(String proc, List<String> args) {
-  var result = Process.runSync(proc, args);
-  if (result.exitCode != 0) {
-	throw Exception('Bruh, "$proc $args" failed!');
-//    throw ProcessException(
-//        proc, args, result.stderr as String, result.exitCode);
+Future<void> _runProc(String proc, List<String> args) async {
+  var result = await Process.start(proc, args, mode: ProcessStartMode.inheritStdio);
+
+  if (await result.exitCode != 0) {
+		throw Exception('"$proc ${args.join(' ')}" failed!');
   }
-  return (result.stdout as String).trim();
 }
