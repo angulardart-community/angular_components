@@ -19,8 +19,8 @@ echo "Installing protoc..."
 # Download protoc.
 mkdir $HOME/protoc
 pushd $HOME/protoc
-wget https://github.com/google/protobuf/releases/download/v$PROTOC_VERSION/protoc-$PROTOC_VERSION-linux-x86_64.zip
-unzip protoc-$PROTOC_VERSION-linux-x86_64.zip
+wget https://github.com/google/protobuf/releases/download/v$PROTOC_VERSION/protoc-$PROTOC_VERSION-osx-x86_64.zip
+unzip protoc-$PROTOC_VERSION-osx-x86_64.zip
 popd
 
 $HOME/protoc/bin/protoc --version
