@@ -8,6 +8,7 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
+
 @$core.Deprecated('Use dateDescriptor instead')
 const Date$json = const {
   '1': 'Date',
@@ -19,4 +20,5 @@ const Date$json = const {
 };
 
 /// Descriptor for `Date`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List dateDescriptor = $convert.base64Decode('CgREYXRlEhIKBHllYXIYASABKAVSBHllYXISFAoFbW9udGgYAiABKAVSBW1vbnRoEhAKA2RheRgDIAEoBVIDZGF5');
+final $typed_data.Uint8List dateDescriptor = $convert.base64Decode(
+    'CgREYXRlEhIKBHllYXIYASABKAVSBHllYXISFAoFbW9udGgYAiABKAVSBW1vbnRoEhAKA2RheRgDIAEoBVIDZGF5');
