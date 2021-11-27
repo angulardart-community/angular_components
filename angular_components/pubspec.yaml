@@ -16,6 +16,7 @@ dependencies:
   build: ^2.1.1
   build_config: ^1.0.0
   built_collection: ^5.1.1
+  change_case: ^1.0.1
   collection: ^1.15.0-nullsafety.4
   fixnum: ^1.0.0
   intl: ^0.17.0
