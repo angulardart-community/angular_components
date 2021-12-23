@@ -3,15 +3,12 @@
 // BSD-style license that can be found in the LICENSE file.
 
 // @dart=2.9
-import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/model/selection/select.dart';
-import 'package:angular_components/model/selection/selection_container.dart';
 import 'package:angular_components/model/selection/selection_model.dart';
 import 'package:angular_components/model/selection/selection_options.dart';
 import 'package:angular_components/model/ui/has_factory.dart';
-import 'package:angular_components/utils/disposer/disposer.dart';
 
 import 'group/material_tree_group.dart';
 import 'group/material_tree_group_flat.dart';

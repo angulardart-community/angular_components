@@ -9,14 +9,8 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:angular_components/button_decorator/button_decorator.dart';
-import 'package:angular_components/dynamic_component/dynamic_component.dart';
 import 'package:angular_components/interfaces/has_disabled.dart';
-import 'package:angular_components/material_checkbox/material_checkbox.dart';
-import 'package:angular_components/material_select/activation_handler.dart';
-import 'package:angular_components/mixins/material_dropdown_base.dart';
 import 'package:angular_components/model/selection/selection_container.dart';
-import 'package:angular_components/model/selection/selection_model.dart';
 import 'package:angular_components/model/ui/has_factory.dart';
 import 'package:angular_components/utils/disposer/disposer.dart';
 

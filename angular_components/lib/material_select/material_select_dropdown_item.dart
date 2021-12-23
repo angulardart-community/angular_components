@@ -7,9 +7,9 @@
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
 import 'package:angular_components/dynamic_component/dynamic_component.dart';
 import 'package:angular_components/material_checkbox/material_checkbox.dart';
+import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/material_select/activation_handler.dart';
 import 'package:angular_components/material_select/handles_aria.dart';
 import 'package:angular_components/material_select/material_select_item.dart';

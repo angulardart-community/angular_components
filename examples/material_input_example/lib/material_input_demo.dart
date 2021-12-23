@@ -11,7 +11,6 @@ import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/material_input/material_input.dart';
 import 'package:angular_components/material_input/material_input_auto_select.dart';
-import 'package:angular_components/material_input/material_input_multiline.dart';
 import 'package:angular_components/material_input/material_number_accessor.dart';
 import 'package:angular_components/material_tooltip/material_tooltip.dart';
 
