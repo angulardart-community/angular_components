@@ -10,6 +10,7 @@ stages:
         - analyze: .
       sdk:
         - 2.14.2
+        - stable
 
 cache:
   directories:

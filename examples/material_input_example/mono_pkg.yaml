@@ -1,17 +1,16 @@
 # See https://github.com/google/mono_repo.dart for details
 stages:
-  - analyze_and_format_examples_1:
+  - analyze_and_format_examples_2:
     - group:
         - format
-        # errors exist
-        #- analyze: .
+        - analyze: --fatal-infos .
       sdk:
         - dev
-    # errors exist
-    # - group:
-    #     - analyze: .
-    #   sdk:
-    #     - 2.14.2
+    - group:
+        - analyze: .
+      sdk:
+        - 2.14.2
+        - stable
 
 cache:
   directories:
