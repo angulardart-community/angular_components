@@ -18,6 +18,25 @@ github:
     - unit_test
     - build
 
+  on_completion:
+    - name: "Deploy to Firebase Hosting on PR"
+      if: "github.event_name == 'pull_request' && ${{ github.event.pull_request.head.repo.full_name == github.repository }}"
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: Setup Dart SDK
+          uses: dart-lang/setup-dart@v1.3
+          
+        - run: dart pub get && dart run build_runner build -o build
+          working-directory: examples/angular_components_example
+
+        - uses: FirebaseExtended/action-hosting-deploy@v0
+          with:
+            repoToken: '${{ secrets.GITHUB_TOKEN }}'
+            firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ANGULARDART_COMMUNITY }}'
+            projectId: angulardart-community
+
 merge_stages:
   - analyze_and_format_core
   - analyze_and_format_examples_1

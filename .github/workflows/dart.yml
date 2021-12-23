@@ -1636,3 +1636,40 @@ jobs:
       - job_016
       - job_017
       - job_018
+  job_022:
+    name: Deploy to Firebase Hosting on PR
+    if: "github.event_name == 'pull_request' && ${{ github.event.pull_request.head.repo.full_name == github.repository }}"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@v1.3
+      - run: "dart pub get && dart run build_runner build -o build"
+        working-directory: examples/angular_components_example
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_ANGULARDART_COMMUNITY }}"
+          projectId: angulardart-community
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+      - job_005
+      - job_006
+      - job_007
+      - job_008
+      - job_009
+      - job_010
+      - job_011
+      - job_012
+      - job_013
+      - job_014
+      - job_015
+      - job_016
+      - job_017
+      - job_018
+      - job_019
+      - job_020
+      - job_021
