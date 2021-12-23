@@ -1638,35 +1638,8 @@ jobs:
       - job_017
       - job_018
   job_022:
-    name: Dump GitHub event
-    runs-on: ubuntu-latest
-    steps:
-      - run: "echo \"${{ github.event_name }}\""
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-  job_023:
     name: Deploy to Firebase Hosting on PR
-    if: "github.event_name == 'pull_request' && ${{ github.event.pull_request.head.repo.full_name == github.repository }}"
+    if: "${{ github.event_name }} == 'pull_request' && ${{ github.event.pull_request.head.repo.full_name == github.repository }}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
