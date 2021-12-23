@@ -9,6 +9,7 @@ github:
         - main
         - master
         - null-safety
+        - fix-ci-null-safety
     pull_request:
   # cron: '0 0 * * 0' # “At 00:00 (UTC) on Sunday.” # Conflict with `on`
   stages:
@@ -20,7 +21,9 @@ github:
 
   on_completion:
     - name: Dump GitHub event
-      run: echo "${{ github.event_name }}"
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo "${{ github.event_name }}"
     - name: "Deploy to Firebase Hosting on PR"
       if: "github.event_name == 'pull_request' && ${{ github.event.pull_request.head.repo.full_name == github.repository }}"
       runs-on: ubuntu-latest

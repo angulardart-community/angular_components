@@ -6,6 +6,7 @@ on:
       - main
       - master
       - null-safety
+      - fix-ci-null-safety
   pull_request:
 defaults:
   run:
@@ -1638,7 +1639,9 @@ jobs:
       - job_018
   job_022:
     name: Dump GitHub event
-    run: "echo \"${{ github.event_name }}\""
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo \"${{ github.event_name }}\""
     needs:
       - job_001
       - job_002
