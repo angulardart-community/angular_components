@@ -4,11 +4,11 @@ stages:
     - group:
         - format
         - analyze: .
-      dart:
+      sdk:
         - dev
     - group:
         - analyze: .
-      dart:
+      sdk:
         - 2.14.2
 
 cache:
