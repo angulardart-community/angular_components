@@ -5,12 +5,12 @@ stages:
         - format
         # errors exist
         #- analyze: .
-      dart:
+      sdk:
         - dev
     # errors exist
     # - group:
     #     - analyze: .
-    #   dart:
+    #   sdk:
     #     - 2.14.2
 
 cache:
