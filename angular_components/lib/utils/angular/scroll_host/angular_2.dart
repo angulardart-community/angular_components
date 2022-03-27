@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
 import 'dart:html';
 
@@ -53,9 +51,9 @@ class ElementScrollHost implements OnInit, OnDestroy, ElementScrollHostBase {
   final StreamController<Null> _onUpdate =
       StreamController.broadcast(sync: true);
 
-  ElementScrollHostBase _scrollHost;
+  ElementScrollHostBase? _scrollHost;
 
-  bool _disableAutoScroll;
+  bool? _disableAutoScroll;
   bool _usePositionSticky = false;
   bool _useTouchGestureListener = true;
   bool _enableSmoothPushing = false;
@@ -71,13 +69,17 @@ class ElementScrollHost implements OnInit, OnDestroy, ElementScrollHostBase {
   void _init() {
     _scrollHost?.dispose();
     _scrollHost = ElementScrollHostBase(
-        _domService, _ngZone, _gestureListenerFactory, element,
-        usePositionSticky: _usePositionSticky,
-        useTouchGestureListener: _useTouchGestureListener);
-    stickyController.enableSmoothPushing = _enableSmoothPushing;
+      _domService,
+      _ngZone,
+      _gestureListenerFactory,
+      element,
+      usePositionSticky: _usePositionSticky,
+      useTouchGestureListener: _useTouchGestureListener,
+    );
+    stickyController!.enableSmoothPushing = _enableSmoothPushing;
 
     if (!_usePositionSticky) {
-      _onUpdate.addStream(stickyController.onUpdate);
+      _onUpdate.addStream(stickyController!.onUpdate);
     }
   }
 
@@ -164,7 +166,7 @@ class ElementScrollHost implements OnInit, OnDestroy, ElementScrollHostBase {
   }
 
   @override
-  Rectangle calcViewportRect() => _scrollHost.calcViewportRect();
+  Rectangle calcViewportRect() => _scrollHost!.calcViewportRect();
 
   @override
   void scrollToPosition(int position) =>
@@ -174,59 +176,59 @@ class ElementScrollHost implements OnInit, OnDestroy, ElementScrollHostBase {
   void scrollWithDelta(int delta) => _scrollHost?.scrollWithDelta(delta);
 
   @override
-  void startNativeScrollListener() => _scrollHost.startNativeScrollListener();
+  void startNativeScrollListener() => _scrollHost?.startNativeScrollListener();
 
   @override
-  int get scrollHeight => _scrollHost.scrollHeight;
+  int get scrollHeight => _scrollHost!.scrollHeight;
 
   @override
-  int get clientHeight => _scrollHost.clientHeight;
+  int get clientHeight => _scrollHost!.clientHeight;
 
   @override
-  Stream<ScrollHostEvent> get nativeOnScroll => _scrollHost.nativeOnScroll;
+  Stream<ScrollHostEvent> get nativeOnScroll => _scrollHost!.nativeOnScroll;
 
   @override
-  bool get usePositionSticky => _scrollHost.usePositionSticky;
+  bool get usePositionSticky => _scrollHost!.usePositionSticky;
 
   @override
-  bool get useTouchGestureListener => _scrollHost.useTouchGestureListener;
+  bool get useTouchGestureListener => _scrollHost!.useTouchGestureListener;
 
   @override
-  bool get throttleScrollEvents => _scrollHost.throttleScrollEvents;
+  bool get throttleScrollEvents => _scrollHost!.throttleScrollEvents;
 
   @override
-  GlobalEventHandlers get scrollbarHost => _scrollHost.scrollbarHost;
+  GlobalEventHandlers get scrollbarHost => _scrollHost!.scrollbarHost;
 
   @override
-  int get clientWidth => _scrollHost.clientWidth;
+  int get clientWidth => _scrollHost!.clientWidth;
 
   @override
-  num get offsetX => _scrollHost.offsetX;
+  num get offsetX => _scrollHost!.offsetX;
 
   @override
-  num get offsetY => _scrollHost.offsetY;
+  num get offsetY => _scrollHost!.offsetY;
 
   @override
-  Element get anchorElement => _scrollHost.anchorElement;
+  Element get anchorElement => _scrollHost!.anchorElement;
 
   @override
-  Stream<ScrollHostEvent> get onScroll => _scrollHost.onScroll;
+  Stream<ScrollHostEvent> get onScroll => _scrollHost!.onScroll!;
 
   @override
-  PanController get panController => _scrollHost.panController;
+  PanController get panController => _scrollHost!.panController!;
 
   @override
-  StickyController get stickyController => _scrollHost?.stickyController;
+  StickyController? get stickyController => _scrollHost?.stickyController;
 
   @override
-  int get scrollLength => _scrollHost.scrollLength;
+  int get scrollLength => _scrollHost!.scrollLength;
 
   @override
-  int get scrollPosition => _scrollHost.scrollPosition;
+  int get scrollPosition => _scrollHost!.scrollPosition;
 
   @override
-  Stream<IntersectionObserverEntry> onIntersection(Element element) =>
-      _scrollHost.onIntersection(element);
+  Stream<IntersectionObserverEntry?> onIntersection(Element? element) =>
+      _scrollHost!.onIntersection(element);
 
   @override
   void ngOnDestroy() {
@@ -234,7 +236,7 @@ class ElementScrollHost implements OnInit, OnDestroy, ElementScrollHostBase {
   }
 
   @override
-  void stopEvent(WheelEvent event) => _scrollHost.stopEvent(event);
+  void stopEvent(WheelEvent event) => _scrollHost!.stopEvent(event);
 }
 
 /// Provides a scroll host that uses the browser window content area.
@@ -266,12 +268,12 @@ class StickyFloatingTracker implements OnInit, OnDestroy {
 
   @override
   void ngOnInit() {
-    _scrollHost.stickyController.trackFloating(_element);
+    _scrollHost.stickyController?.trackFloating(_element);
   }
 
   @override
   void ngOnDestroy() {
-    _scrollHost.stickyController.untrackFloating(_element);
+    _scrollHost.stickyController?.untrackFloating(_element);
   }
 }
 
@@ -327,9 +329,9 @@ class AcxPanClassDirective extends BasePanClassDirective
 class StickyElementDirective implements AfterViewInit, OnDestroy {
   final Element _stickyElement;
   final ScrollHost _scrollHost;
-  Element _endElement;
-  String _stickyClass;
-  String _stickyKey;
+  Element? _endElement;
+  String? _stickyClass;
+  String? _stickyKey;
   bool _sticky = true;
   StickyPosition _position = StickyPosition.TOP;
 
@@ -396,5 +398,5 @@ class StickyElementDirective implements AfterViewInit, OnDestroy {
     _stickyController?.unstick(_stickyElement);
   }
 
-  StickyController get _stickyController => _scrollHost.stickyController;
+  StickyController? get _stickyController => _scrollHost.stickyController;
 }

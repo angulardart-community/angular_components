@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
 import 'dart:html';
 
@@ -70,11 +68,11 @@ class AcxImperativeViewUtils {
 
   /// Returns a future that completes with a new instance created by
   /// [componentFactory], once it is inserted [intoDomElement].
-  Future<ComponentRef<T>> insertComponent<T>(
+  Future<ComponentRef<T>> insertComponent<T extends Object>(
       ComponentFactory<T> componentFactory,
       ViewContainerRef viewContainer,
       HtmlElement intoDomElement,
-      {Injector injector}) async {
+      {Injector? injector}) async {
     final ref = _componentLoader.loadNextToLocation<T>(
         componentFactory, viewContainer,
         injector: injector ?? viewContainer.parentInjector);
