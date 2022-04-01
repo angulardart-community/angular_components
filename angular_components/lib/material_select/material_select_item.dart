@@ -9,7 +9,7 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/model/selection/selection_container.dart';
 import 'package:angular_components/model/ui/has_factory.dart';
 import 'package:angular_components/utils/disposer/disposer.dart';

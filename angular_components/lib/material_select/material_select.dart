@@ -9,7 +9,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/focus/focus_item.dart';
 import 'package:angular_components/focus/focus_list.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/material_list/material_list.dart';
 import 'package:angular_components/model/selection/select.dart';
 import 'package:angular_components/model/selection/selection_container.dart';

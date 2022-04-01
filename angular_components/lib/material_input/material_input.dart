@@ -7,7 +7,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_components/focus/focus.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/utils/angular/reference/reference.dart';
 

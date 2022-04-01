@@ -11,7 +11,7 @@ import 'dart:math' as math;
 import 'package:angular/angular.dart';
 import 'package:intl/intl.dart';
 import 'package:quiver/check.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/utils/browser/dom_service/dom_service.dart';
 
 /// A [material slider](https://material.io/guidelines/components/sliders.html)

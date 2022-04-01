@@ -5,7 +5,7 @@
 // @dart=2.9
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 
 // TODO(google): This copies a lot of values from material-input, and yet
 // material-input doesn't use it. Consider refactoring so that these

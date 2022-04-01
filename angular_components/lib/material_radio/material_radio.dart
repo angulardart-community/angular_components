@@ -9,7 +9,7 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/focus/focus.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/material_radio/material_radio_group.dart';
 import 'package:angular_components/material_ripple/material_ripple.dart';

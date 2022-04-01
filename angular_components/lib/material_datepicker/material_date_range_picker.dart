@@ -13,7 +13,7 @@ import 'package:angular_components/content/deferred_content.dart';
 import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/focus/focus_trap.dart';
 import 'package:angular_components/focus/keyboard_only_focus_indicator.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/laminate/enums/alignment.dart';
 import 'package:angular_components/laminate/popup/popup.dart';
 import 'package:angular_components/material_button/material_button.dart';

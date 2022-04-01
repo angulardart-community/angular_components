@@ -10,7 +10,7 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:intl/intl.dart';
 import 'package:angular_components/focus/focus.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_spinner/material_spinner.dart';
 

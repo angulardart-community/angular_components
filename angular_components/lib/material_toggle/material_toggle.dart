@@ -10,7 +10,7 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:meta/meta.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/utils/browser/events/events.dart';
 
 /// `material-toggle` is a button that can be either ON or OFF.

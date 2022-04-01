@@ -9,7 +9,7 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/focus/focus.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/mixins/has_tab_index.dart';
 import 'package:angular_components/utils/browser/events/events.dart';
 

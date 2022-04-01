@@ -10,7 +10,7 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:intl/intl.dart';
 import 'package:quiver/time.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/material_datepicker/module.dart';
 import 'package:angular_components/material_input/material_input.dart';
 import 'package:angular_components/material_select/material_dropdown_select.dart';

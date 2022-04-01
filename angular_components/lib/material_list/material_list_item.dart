@@ -8,7 +8,7 @@ import 'dart:html' as dom;
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/button_decorator/button_decorator.dart';
-import 'package:angular_components/interfaces/has_disabled.dart';
+import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/mixins/material_dropdown_base.dart';
 import 'package:angular_components/utils/disposer/disposer.dart';
 
