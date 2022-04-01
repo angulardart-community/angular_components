@@ -6,7 +6,7 @@
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/annotations/rtl_annotation.dart';
-import 'package:angular_components/content/deferred_content.dart';
+import 'package:angular_components/content.dart';
 import 'package:angular_components/material_tab/material_tab.dart';
 import 'package:angular_components/material_tab/material_tab_panel.dart';
 import 'package:angular_gallery_section/components/content/delayed_content.dart';

@@ -7,7 +7,7 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/content/deferred_content_aware.dart';
+import 'package:angular_components/src/content/deferred_content_aware.dart';
 
 // When deferred content should be removed. Needs to be longer than the longest
 // animation.

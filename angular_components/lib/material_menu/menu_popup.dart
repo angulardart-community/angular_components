@@ -7,7 +7,7 @@
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/content/deferred_content.dart';
+import 'package:angular_components/src/content/deferred_content.dart';
 import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/focus/focus_trap.dart';
 import 'package:angular_components/laminate/popup/popup.dart';

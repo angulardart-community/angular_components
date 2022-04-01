@@ -10,8 +10,8 @@ import 'dart:math';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/button_decorator/button_decorator.dart';
-import 'package:angular_components/content/deferred_content.dart';
-import 'package:angular_components/content/deferred_content_aware.dart';
+import 'package:angular_components/src/content/deferred_content.dart';
+import 'package:angular_components/src/content/deferred_content_aware.dart';
 import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/focus/keyboard_only_focus_indicator.dart';
 import 'package:angular_components/src/interfaces/has_disabled.dart';

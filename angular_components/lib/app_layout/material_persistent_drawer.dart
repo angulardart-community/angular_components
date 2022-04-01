@@ -5,7 +5,7 @@
 // @dart=2.9
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/content/deferred_content_aware.dart';
+import 'package:angular_components/src/content/deferred_content_aware.dart';
 
 import 'material_drawer_base.dart';
 

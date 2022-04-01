@@ -6,7 +6,7 @@
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/app_layout/material_temporary_drawer.dart';
-import 'package:angular_components/content/deferred_content_aware.dart';
+import 'package:angular_components/src/content/deferred_content_aware.dart';
 
 /// A stackable temporary drawer that can be opened and closed.
 ///

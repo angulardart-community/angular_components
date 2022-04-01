@@ -5,7 +5,7 @@
 // @dart=2.9
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/content/deferred_content.dart';
+import 'package:angular_components/content.dart';
 import 'package:angular_components/focus/keyboard_only_focus_indicator.dart';
 import 'package:angular_components/laminate/enums/alignment.dart';
 import 'package:angular_components/laminate/popup/module.dart';
