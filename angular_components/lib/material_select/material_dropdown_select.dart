@@ -8,7 +8,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/annotations/rtl_annotation.dart';
+import 'package:angular_components/src/annotations/rtl_annotation.dart';
 import 'package:angular_components/src/content/deferred_content.dart';
 import 'package:angular_components/src/content/deferred_content_aware.dart';
 import 'package:angular_components/dynamic_component/dynamic_component.dart';

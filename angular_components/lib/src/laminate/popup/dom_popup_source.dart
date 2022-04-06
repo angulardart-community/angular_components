@@ -8,7 +8,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/annotations/rtl_annotation.dart';
+import 'package:angular_components/src/annotations/rtl_annotation.dart';
 import 'package:angular_components/laminate/enums/alignment.dart';
 import 'package:angular_components/laminate/ruler/dom_ruler.dart';
 import 'package:angular_components/src/laminate/popup/popup_source.dart';

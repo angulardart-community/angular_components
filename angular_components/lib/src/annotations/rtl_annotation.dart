@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:html';
 
 import 'package:angular/angular.dart';
@@ -21,5 +19,5 @@ const rtlProvider =
 
 @Injectable()
 bool determineRtl(Document document) =>
-    document.documentElement.dir == 'rtl' ||
-    (document as HtmlDocument).body.dir == 'rtl';
+    document.documentElement?.dir == 'rtl' ||
+    (document as HtmlDocument).body?.dir == 'rtl';

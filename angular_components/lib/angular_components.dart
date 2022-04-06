@@ -87,7 +87,7 @@ import 'scorecard/scorecard.dart';
 import 'stop_propagation/stop_propagation.dart';
 import 'theme/dark_theme.dart';
 
-export 'annotations/rtl_annotation.dart';
+export 'src/annotations/rtl_annotation.dart';
 export 'app_layout/material_drawer_base.dart';
 export 'app_layout/material_persistent_drawer.dart';
 export 'app_layout/material_stackable_drawer.dart';
