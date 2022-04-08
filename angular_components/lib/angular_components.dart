@@ -21,7 +21,7 @@ import 'focus/focus_trap.dart';
 import 'focus/keyboard_only_focus_indicator.dart';
 import 'highlighted_text/highlighted_text.dart';
 import 'highlighted_text/highlighted_value.dart';
-import 'laminate/components/modal/modal.dart';
+import 'src/laminate/components/modal/modal.dart';
 import 'material_button/material_button.dart';
 import 'material_button/material_fab.dart';
 import 'material_checkbox/material_checkbox.dart'
@@ -106,7 +106,7 @@ export 'focus/keyboard_only_focus_indicator.dart';
 export 'forms/error_renderer.dart';
 export 'highlighted_text/highlighted_text.dart';
 export 'highlighted_text/highlighted_value.dart';
-export 'laminate/components/modal/modal.dart';
+export 'src/laminate/components/modal/modal.dart';
 export 'laminate/enums/alignment.dart';
 export 'laminate/overlay/module.dart';
 export 'laminate/popup/module.dart';

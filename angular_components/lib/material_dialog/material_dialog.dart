@@ -9,7 +9,7 @@ import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/focus/focus_trap.dart';
-import 'package:angular_components/laminate/components/modal/modal.dart';
+import 'package:angular_components/src/laminate/components/modal/modal.dart';
 import 'package:angular_components/model/a11y/keyboard_handler_mixin.dart';
 import 'package:angular_components/utils/browser/dom_service/dom_service.dart';
 import 'package:angular_components/utils/disposer/disposer.dart';

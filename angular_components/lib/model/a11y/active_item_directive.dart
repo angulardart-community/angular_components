@@ -9,7 +9,7 @@ import 'dart:html' as dom;
 
 import 'package:angular/angular.dart';
 import 'package:js/js_util.dart' as js_util;
-import 'package:angular_components/laminate/components/modal/modal.dart';
+import 'package:angular_components/src/laminate/components/modal/modal.dart';
 import 'package:angular_components/laminate/popup/popup.dart';
 import 'package:angular_components/utils/browser/dom_service/dom_service.dart';
 
