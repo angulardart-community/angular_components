@@ -9,7 +9,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/focus/focus_list.dart';
-import 'package:angular_components/laminate/components/modal/modal.dart';
+import 'package:angular_components/laminate.dart';
 import 'package:angular_components/laminate/overlay/module.dart';
 import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_dialog/material_dialog.dart';
