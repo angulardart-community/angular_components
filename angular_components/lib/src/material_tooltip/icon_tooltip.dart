@@ -11,7 +11,7 @@ import 'package:angular/angular.dart';
 import 'package:intl/intl.dart';
 import 'package:angular_components/src/content/deferred_content_aware.dart';
 import 'package:angular_components/focus/keyboard_only_focus_indicator.dart';
-import 'package:angular_components/laminate/enums/alignment.dart';
+import 'package:angular_components/src/laminate/enums/alignment.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/theme/dark_theme.dart';
 

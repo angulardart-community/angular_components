@@ -8,7 +8,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart' hide Visibility;
-import 'package:angular_components/laminate/enums/visibility.dart';
+import 'package:angular_components/src/laminate/enums/visibility.dart';
 import 'package:angular_components/model/math/box.dart';
 import 'package:angular_components/src/laminate/overlay/overlay_state.dart';
 import 'package:angular_components/src/laminate/overlay/render/overlay_style_config.dart';

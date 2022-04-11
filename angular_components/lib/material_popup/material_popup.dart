@@ -12,8 +12,8 @@ import 'package:angular/angular.dart';
 import 'package:meta/meta.dart';
 import 'package:angular_components/src/content/deferred_content_aware.dart';
 import 'package:angular_components/focus/focus_interface.dart';
-import 'package:angular_components/laminate/enums/alignment.dart';
-import 'package:angular_components/laminate/enums/visibility.dart'
+import 'package:angular_components/src/laminate/enums/alignment.dart';
+import 'package:angular_components/src/laminate/enums/visibility.dart'
     as visibility;
 import 'package:angular_components/laminate/overlay/module.dart';
 import 'package:angular_components/laminate/overlay/overlay.dart';

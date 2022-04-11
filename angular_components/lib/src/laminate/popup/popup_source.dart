@@ -8,7 +8,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular_components/focus/focus_interface.dart';
-import 'package:angular_components/laminate/enums/alignment.dart';
+import 'package:angular_components/src/laminate/enums/alignment.dart';
 
 /// The source of where a popup will be created from.
 ///

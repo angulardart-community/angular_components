@@ -11,7 +11,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/src/content/deferred_content.dart';
 import 'package:angular_components/src/content/deferred_content_aware.dart';
 import 'package:angular_components/focus/focus.dart';
-import 'package:angular_components/laminate/enums/alignment.dart';
+import 'package:angular_components/src/laminate/enums/alignment.dart';
 import 'package:angular_components/laminate/popup/popup.dart' show PopupSource;
 import 'package:angular_components/material_popup/material_popup.dart';
 import 'package:angular_components/material_tooltip/module.dart';

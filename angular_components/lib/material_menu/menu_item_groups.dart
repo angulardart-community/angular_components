@@ -14,7 +14,7 @@ import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/focus/focus_activable_item.dart';
 import 'package:angular_components/focus/focus_trap.dart';
 import 'package:angular_components/highlighted_text/highlighted_text.dart';
-import 'package:angular_components/laminate/enums/alignment.dart';
+import 'package:angular_components/src/laminate/enums/alignment.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/material_list/material_list.dart';
 import 'package:angular_components/material_menu/material_menu.dart';

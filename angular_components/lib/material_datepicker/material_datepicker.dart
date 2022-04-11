@@ -14,7 +14,7 @@ import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/focus/focus_trap.dart';
 import 'package:angular_components/focus/keyboard_only_focus_indicator.dart';
 import 'package:angular_components/src/interfaces/has_disabled.dart';
-import 'package:angular_components/laminate/enums/alignment.dart';
+import 'package:angular_components/src/laminate/enums/alignment.dart';
 import 'package:angular_components/material_datepicker/calendar.dart';
 import 'package:angular_components/material_datepicker/date_input.dart';
 import 'package:angular_components/material_datepicker/material_calendar_picker.dart';
