@@ -15,9 +15,9 @@ import 'package:angular_components/focus/focus_interface.dart';
 import 'package:angular_components/src/laminate/enums/alignment.dart';
 import 'package:angular_components/src/laminate/enums/visibility.dart'
     as visibility;
-import 'package:angular_components/laminate/overlay/module.dart';
-import 'package:angular_components/laminate/overlay/overlay.dart';
-import 'package:angular_components/laminate/overlay/zindexer.dart';
+import 'package:angular_components/src/laminate/overlay/module.dart';
+import 'package:angular_components/src/laminate/overlay/overlay.dart';
+import 'package:angular_components/src/laminate/overlay/zindexer.dart';
 import 'package:angular_components/laminate/popup/module.dart';
 import 'package:angular_components/laminate/popup/popup.dart';
 import 'package:angular_components/mixins/material_dropdown_base.dart';

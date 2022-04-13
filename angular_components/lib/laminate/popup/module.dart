@@ -6,7 +6,7 @@
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/src/laminate/enums/alignment.dart';
-import 'package:angular_components/laminate/overlay/module.dart';
+import 'package:angular_components/src/laminate/overlay/module.dart';
 import 'package:angular_components/src/laminate/popup/dom_popup_source.dart';
 
 const inlinePositions = RelativePosition.InlinePositions;

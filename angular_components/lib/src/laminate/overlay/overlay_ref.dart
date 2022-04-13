@@ -9,7 +9,8 @@ import 'dart:html';
 
 import 'package:angular_components/src/laminate/enums/visibility.dart';
 import 'package:angular_components/laminate/portal/portal.dart';
-import 'package:angular_components/src/laminate/overlay/overlay_state.dart';
+
+import 'overlay_state.dart';
 
 /// A handler to apply [state] to an existing [element].
 ///

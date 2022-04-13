@@ -8,7 +8,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/laminate/overlay/constants.dart';
+import 'package:angular_components/src/laminate/overlay/constants.dart';
 import 'package:angular_components/utils/browser/events/events.dart' as events;
 
 /// Tracks a hierarchy of visible popup and provides it closing logic.

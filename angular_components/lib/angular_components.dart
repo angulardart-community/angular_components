@@ -108,7 +108,7 @@ export 'highlighted_text/highlighted_text.dart';
 export 'highlighted_text/highlighted_value.dart';
 export 'src/laminate/components/modal/modal.dart';
 export 'src/laminate/enums/alignment.dart';
-export 'laminate/overlay/module.dart';
+export 'src/laminate/overlay/module.dart';
 export 'laminate/popup/module.dart';
 export 'laminate/popup/popup.dart';
 export 'material_button/material_button.dart';
