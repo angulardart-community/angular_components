@@ -7,7 +7,7 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/laminate/portal/portal.dart';
+import 'package:angular_components/src/laminate/portal/portal.dart';
 import 'package:angular_components/model/action/async_action.dart';
 
 /// A step within the stepper.

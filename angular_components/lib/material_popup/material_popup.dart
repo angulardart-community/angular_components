@@ -18,8 +18,8 @@ import 'package:angular_components/src/laminate/enums/visibility.dart'
 import 'package:angular_components/src/laminate/overlay/module.dart';
 import 'package:angular_components/src/laminate/overlay/overlay.dart';
 import 'package:angular_components/src/laminate/overlay/zindexer.dart';
-import 'package:angular_components/laminate/popup/module.dart';
-import 'package:angular_components/laminate/popup/popup.dart';
+import 'package:angular_components/src/laminate/popup/module.dart';
+import 'package:angular_components/src/laminate/popup/popup.dart';
 import 'package:angular_components/mixins/material_dropdown_base.dart';
 import 'package:angular_components/model/math/box.dart';
 import 'package:angular_components/model/ui/toggle.dart';
@@ -28,7 +28,7 @@ import 'package:angular_components/utils/browser/dom_service/angular_2.dart';
 import 'package:angular_components/utils/disposer/disposer.dart';
 import 'package:angular_components/utils/id_generator/id_generator.dart';
 
-export 'package:angular_components/laminate/popup/popup.dart'
+export 'package:angular_components/src/laminate/popup/popup.dart'
     show PopupSourceDirective;
 
 /// A popup component with material design look-and-feel.

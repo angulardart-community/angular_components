@@ -13,8 +13,8 @@ import 'package:angular_components/model/math/box.dart';
 import 'package:angular_components/src/laminate/overlay/overlay_state.dart';
 import 'package:angular_components/src/laminate/overlay/render/overlay_style_config.dart';
 import 'package:angular_components/src/laminate/overlay/zindexer.dart';
-import 'package:angular_components/laminate/portal/portal.dart';
-import 'package:angular_components/laminate/ruler/dom_ruler.dart';
+import 'package:angular_components/src/laminate/portal/portal.dart';
+import 'package:angular_components/src/laminate/ruler/dom_ruler.dart';
 import 'package:angular_components/utils/angular/imperative_view/imperative_view.dart';
 import 'package:angular_components/utils/browser/dom_service/dom_service.dart';
 

@@ -10,7 +10,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/src/content/deferred_content.dart';
 import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/focus/focus_trap.dart';
-import 'package:angular_components/laminate/popup/popup.dart';
+import 'package:angular_components/src/laminate/popup/popup.dart';
 import 'package:angular_components/material_list/material_list.dart';
 import 'package:angular_components/material_menu/menu_item_groups.dart';
 import 'package:angular_components/material_menu/menu_popup_wrapper.dart';

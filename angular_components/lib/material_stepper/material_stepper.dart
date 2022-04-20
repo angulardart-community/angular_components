@@ -10,7 +10,7 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:intl/intl.dart';
 import 'package:angular_components/button_decorator/button_decorator.dart';
-import 'package:angular_components/laminate/portal/portal.dart';
+import 'package:angular_components/src/laminate/portal/portal.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/material_stepper/common.dart';
 import 'package:angular_components/material_stepper/material_step.dart';

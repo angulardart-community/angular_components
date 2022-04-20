@@ -16,7 +16,7 @@ import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/focus/keyboard_only_focus_indicator.dart';
 import 'package:angular_components/src/interfaces/has_disabled.dart';
 import 'package:angular_components/src/laminate/enums/alignment.dart';
-import 'package:angular_components/laminate/popup/popup.dart';
+import 'package:angular_components/src/laminate/popup/popup.dart';
 import 'package:angular_components/material_list/material_list.dart';
 import 'package:angular_components/material_popup/material_popup.dart';
 import 'package:angular_components/material_select/activation_handler.dart';

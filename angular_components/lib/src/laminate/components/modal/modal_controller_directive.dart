@@ -6,7 +6,7 @@
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/src/laminate/overlay/overlay.dart';
-import 'package:angular_components/laminate/portal/portal.dart';
+import 'package:angular_components/src/laminate/portal/portal.dart';
 
 /// An internal directive that is used by the modal component to hoist content.
 @Directive(

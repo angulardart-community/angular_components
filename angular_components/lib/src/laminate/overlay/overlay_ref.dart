@@ -8,7 +8,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:angular_components/src/laminate/enums/visibility.dart';
-import 'package:angular_components/laminate/portal/portal.dart';
+import 'package:angular_components/src/laminate/portal/portal.dart';
 
 import 'overlay_state.dart';
 
