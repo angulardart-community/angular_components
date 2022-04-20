@@ -7,6 +7,7 @@ import 'dart:math';
 
 import 'package:angular_components/utils/browser/dom_service/dom_service.dart';
 
+import '../enums/base.dart';
 import '../enums/position.dart';
 import '../enums/visibility.dart';
 
@@ -142,7 +143,7 @@ abstract class RulerBase<E> implements Ruler<E> {
         onCancel: () {
           subscription.cancel();
         });
-    return controller.stream.distinct((Rectangle previous, Rectangle next) {
+    return controller.stream.distinct((Rectangle? previous, Rectangle? next) {
       if (previous == null || next == null) return identical(previous, next);
 
       // We consider rectangles equal if their coordinates are within a
