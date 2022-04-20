@@ -10,7 +10,6 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/focus/focus_list.dart';
 import 'package:angular_components/laminate.dart';
-import 'package:angular_components/laminate.dart';
 import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_dialog/material_dialog.dart';
 import 'package:angular_components/material_expansionpanel/material_expansionpanel.dart';

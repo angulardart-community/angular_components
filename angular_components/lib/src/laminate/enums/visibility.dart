@@ -4,8 +4,6 @@
 
 import 'package:angular_components/src/laminate/enums/base.dart';
 
-export 'package:angular_components/src/laminate/enums/base.dart';
-
 /// Enum for browser visibility options.
 class Visibility implements ElementStyleEnum {
   /// Equivalent to "display: none". Does not render.

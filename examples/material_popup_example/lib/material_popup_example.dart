@@ -7,10 +7,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/content.dart';
 import 'package:angular_components/laminate.dart';
-import 'package:angular_components/laminate.dart';
-import 'package:angular_components/laminate.dart';
-import 'package:angular_components/laminate.dart';
-import 'package:angular_components/laminate.dart';
 import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_popup/material_popup.dart';
 import 'package:angular_components/material_select/material_dropdown_select.dart';
