@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
 import 'dart:html';
 
@@ -14,6 +12,8 @@ import 'package:angular_components/utils/browser/dom_service/dom_service.dart';
 /// Measures and tracks size changes for HTML elements in Dart web applications.
 @Injectable()
 abstract class DomRuler implements Ruler<Element> {
+  Stream<Rectangle> track(Element element, {bool aways = false});
+
   factory DomRuler(Document document, DomService domService) = DomRulerImpl;
 }
 
@@ -28,13 +28,13 @@ class DomRulerImpl extends RulerBase<Element> implements DomRuler {
   @override
   bool canSyncWrite(Element element) {
     if (_document is HtmlDocument) {
-      return !(_document as HtmlDocument).body.contains(element);
+      return !(_document as HtmlDocument).body!.contains(element);
     }
     return !_document.contains(element);
   }
 
   @override
-  Stream<DomService> get onLayoutChanged => _domService.onLayoutChanged;
+  Stream<DomService>? get onLayoutChanged => _domService.onLayoutChanged;
 
   @override
   Future<void> onRead() => _domService.onRead();
@@ -63,8 +63,8 @@ class DomRulerImpl extends RulerBase<Element> implements DomRuler {
   }
 
   @override
-  Stream<Rectangle> track(Element element) {
-    if (canSyncWrite(element)) {
+  Stream<Rectangle> track(Element element, {bool aways = false}) {
+    if (canSyncWrite(element) && !aways) {
       // It is not possible to measure something not in the live DOM.
       // throw new StateError('Element is not in the live DOM document.');
       return Stream<Rectangle>.fromIterable(const [Rectangle(0, 0, 0, 0)]);
@@ -89,7 +89,7 @@ class DomRulerImpl extends RulerBase<Element> implements DomRuler {
 
   @override
   void setCssPropertySync(
-      Element element, String propertyName, String propertyValue) {
-    element.style.setProperty(propertyName, propertyValue);
+      Element element, String? propertyName, String? propertyValue) {
+    element.style.setProperty(propertyName!, propertyValue);
   }
 }

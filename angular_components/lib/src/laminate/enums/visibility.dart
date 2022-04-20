@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'package:angular_components/src/laminate/enums/base.dart';
 
 export 'package:angular_components/src/laminate/enums/base.dart';
@@ -22,8 +20,8 @@ class Visibility implements ElementStyleEnum {
   /// The enum name of the instance.
   final String displayName;
 
-  final String _propertyName;
-  final String _propertyValue;
+  final String? _propertyName;
+  final String? _propertyValue;
 
   factory Visibility.fromBoolean(bool visible) {
     return visible ? Visible : None;
