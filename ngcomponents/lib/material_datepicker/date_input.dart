@@ -190,7 +190,10 @@ class DateInputDirective implements OnDestroy, Validator {
   }
 
   @override
-  void ngOnDestroy() => _disposer.dispose();
+  void ngOnDestroy() {
+    _controller.close();
+    _disposer.dispose();
+  }
 
   // Clamp the date to first or last day of the month, depending on whether
   // this input field is for the start or the end of a month range.
