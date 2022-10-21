@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
 import 'dart:html';
 
@@ -19,7 +17,8 @@ import 'package:ngcomponents/utils/browser/events/events.dart';
   selector: '[stopPropagation]',
 )
 class StopPropagationDirective implements OnDestroy {
-  StreamSubscription _clickSubscription, _keyPressSubscription;
+  late final StreamSubscription _clickSubscription;
+  late final StreamSubscription _keyPressSubscription;
 
   StopPropagationDirective(Element e) {
     _clickSubscription = e.onClick.listen(_handleClick);
@@ -28,8 +27,8 @@ class StopPropagationDirective implements OnDestroy {
 
   @override
   void ngOnDestroy() {
-    _clickSubscription?.cancel();
-    _keyPressSubscription?.cancel();
+    _clickSubscription.cancel();
+    _keyPressSubscription.cancel();
   }
 
   void _handleClick(MouseEvent e) {
