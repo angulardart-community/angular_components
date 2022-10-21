@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'package:ngdart/angular.dart';
 
 import 'material_icon.dart';
@@ -22,13 +20,13 @@ import 'material_icon.dart';
 /// - `.hide-icon` -- No icon when in a toggled state that doesn't have an icon.
 @Directive(selector: 'material-icon[toggle]')
 class MaterialIconToggleDirective implements AfterChanges {
-  MaterialIconComponent iconRef;
+  MaterialIconComponent? iconRef;
   final ChangeDetectorRef _cdRef;
-  bool _showToggled;
-  bool _showBasic;
-  bool _hideIcon;
+  bool _showToggled = false;
+  bool _showBasic = false;
+  bool _hideIcon = false;
 
-  MaterialIconToggleDirective(this._cdRef, this.iconRef);
+  MaterialIconToggleDirective(this._cdRef, {this.iconRef});
 
   /// The `Icon` model (third_party.dart_src.acx.model.ui.Icon) or icon
   /// identifier (String) to display.
@@ -49,11 +47,11 @@ class MaterialIconToggleDirective implements AfterChanges {
   ///
   /// The [toggledIcon] is displayed when true.
   @Input()
-  bool toggle;
+  bool toggle = false;
 
   @override
   ngAfterChanges() {
-    iconRef.icon = toggle ? toggledIcon : icon;
+    iconRef?.icon = toggle ? toggledIcon : icon;
     _showToggled = toggle && _hasValue(toggledIcon);
     _showBasic = !toggle && _hasValue(icon);
     _hideIcon =
