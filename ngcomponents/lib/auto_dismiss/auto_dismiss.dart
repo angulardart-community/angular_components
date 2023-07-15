@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
 import 'dart:html';
 
@@ -42,18 +40,18 @@ class AutoDismissDirective {
       : _dismissEvents = triggersOutside(element);
 
   bool _ignoreEvents = false;
-  bool _autoDismissable = false;
-  bool get autoDismissable => _autoDismissable;
+  bool _autoDismissible = false;
+  bool get autoDismissable => _autoDismissible;
 
   /// Boolean indicating if the dismiss event be published.
   @Input()
   set autoDismissable(bool b) {
-    _autoDismissable = b;
+    _autoDismissible = b;
 
     // If an event set autoDismissable to `true`, then we don't want the same
     // event to dismiss right away. Stop listening for events until we see a
     // appropriate event, or until the next event loop.
-    _ignoreEvents = _autoDismissable;
+    _ignoreEvents = _autoDismissible;
     _dismissEvents.first.then(_listenForEvents);
     // Run the timer outside of Angular so that it doesn't trigger a new digest
     // cycle.
@@ -64,7 +62,7 @@ class AutoDismissDirective {
   /// the element.
   @Output()
   Stream get dismiss =>
-      _dismissEvents.where((_) => _autoDismissable && !_ignoreEvents);
+      _dismissEvents.where((_) => _autoDismissible && !_ignoreEvents);
 
   void _listenForEvents([_]) => _ignoreEvents = false;
 }
