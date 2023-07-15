@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// @dart=2.9
-
 import 'dart:async';
 import 'dart:html';
 
@@ -36,16 +34,19 @@ class ButtonDirective extends RootFocusable
   final _trigger = StreamController<UIEvent>.broadcast(sync: true);
 
   String _hostTabIndex = '0';
-  final String _nonTabbableIndex;
+  String? _nonTabbableIndex;
   bool _shouldHandleSpaceKey;
 
-  ButtonDirective(Element element, @Attribute('role') String role,
-      {bool addTabIndexWhenNonTabbable = false, bool handleSpacePresses = true})
-      : this.role = (role ?? 'button'),
+  ButtonDirective(
+    Element element,
+    @Attribute('role') String? role, {
+    bool addTabIndexWhenNonTabbable = false,
+    bool handleSpacePresses = true,
+  })  : this.role = role ?? 'button',
         // Allow the subclass to define how the element should be made
         // untabbable.
         _nonTabbableIndex = addTabIndexWhenNonTabbable ? '-1' : null,
-        _shouldHandleSpaceKey = handleSpacePresses ?? true,
+        _shouldHandleSpaceKey = handleSpacePresses,
         super(element);
 
   /// Role of this component used for a11y.
@@ -68,8 +69,10 @@ class ButtonDirective extends RootFocusable
   @Input()
   bool tabbable = true;
 
-  String get hostTabIndex =>
-      tabbable && !disabled ? _hostTabIndex : _nonTabbableIndex;
+  String? get hostTabIndex {
+    if (tabbable && !disabled) return _hostTabIndex;
+    return _nonTabbableIndex;
+  }
 
   /// The tab index of the component.
   ///
